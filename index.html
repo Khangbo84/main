@@ -220,6 +220,16 @@
                 </div>
             </div>
 
+            <div class="card" onclick="goToPage('betmc')">
+                <div class="card-image">
+                    <img src="betmc.jpg" alt="Betmc ui">
+                </div>
+                <div class="card-content">
+                    <h3>Minecraft Background</h3>
+                    <p>Generate your animated background for betmc ui</p>
+                </div>
+            </div>
+
             <div class="card" onclick="goToPage('events')">
                 <div class="card-image">
                     <img src="server.jpg" alt="Server Events">
@@ -251,16 +261,19 @@
         function goToPage(page) {
             switch (page) {
                 case 'maps':
-                    window.location.href = "https://example.com/maps";
+                    window.location.href = "https://khangbo84.github.io/maps/";
                     break;
                 case 'runestone':
-                    window.location.href = "https://example.com/runestone";
+                    window.location.href = "https://khangbo84.github.io/runestonebuild/";
                     break;
                 case 'games':
                     window.location.href = "https://example.com/games";
                     break;
                 case 'events':
                     window.location.href = "https://example.com/events";
+                    break;
+                case 'betmc':
+                    window.location.href = "https://khangbo84.github.io/bg-generator-betmc/";
                     break;
             }
         }
