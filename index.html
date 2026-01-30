@@ -230,9 +230,19 @@
                 </div>
             </div>
 
+            <div class="card" onclick="goToPage('bgpack')">
+                <div class="card-image">
+                    <img src="bg_pack.png" alt="BG Pack">
+                </div>
+                <div class="card-content">
+                    <h3>Minecraft Background Download</h3>
+                    <p>Download available custom backgrounds!</p>
+                </div>
+            </div>
+            
             <div class="card" onclick="goToPage('events')">
                 <div class="card-image">
-                    <img src="server.jpg" alt="Server Events">
+                    <img src="server_events.png" alt="Server Events">
                 </div>
                 <div class="card-content">
                     <h3>Server Events</h3>
@@ -270,10 +280,13 @@
                     window.location.href = "https://example.com/games";
                     break;
                 case 'events':
-                    window.location.href = "https://example.com/events";
+                    window.location.href = "https://khangbo84.github.io/server-events/#";
                     break;
                 case 'betmc':
                     window.location.href = "https://khangbo84.github.io/bg-generator-betmc/";
+                    break;
+                case 'bgpack':
+                    window.location.href = "https://khangbo84.github.io/background-pack/";
                     break;
             }
         }
