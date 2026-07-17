@@ -1,7 +1,7 @@
     window.onerror = function(msg, url, line, col, err){ console.error('window.onerror', {msg,url,line,col, stack: err && err.stack}); }; window.addEventListener('unhandledrejection', e=>console.error('unhandledrejection', e.reason && e.reason.stack ? e.reason.stack : e.reason));
 let builds = [];
 
-fetch('builds.json')
+fetch('configuration/builds.json')
   .then(res => res.json())
   .then(data => {
     builds = data;
