@@ -8,7 +8,7 @@ const popup = document.getElementById("popup");
 let currentCategory = "all";
 
 /* ===== FETCH ===== */
-fetch("maps.json")
+fetch("configuration/maps.json")
 .then(r => r.json())
 .then(d => {
   packs = d;
