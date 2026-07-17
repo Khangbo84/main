@@ -24,7 +24,7 @@ function render(list){
     c.className = "card";
 
     c.innerHTML = `
-      <img src="${config.imgPath+p.image">
+      <img src="${config.imgPath + p.image"}>
       <div class="card-body">
         <span class="type">${p.type}</span>
         <h3>${p.title}</h3>
