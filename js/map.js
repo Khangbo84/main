@@ -4,7 +4,7 @@ const grid = document.getElementById("grid");
 const search = document.getElementById("search");
 const filter = document.getElementById("filter");
 const popup = document.getElementById("popup");
-const config ={ "imgPath":"../banner/maps/", "galleryPath":"../gallery/maps/"}
+const config ={ "imgPath":"../banner/maps/", "galleryPath":"../gallery/maps/","downloadPath":"../download/map/"}
 let currentCategory = "all";
 
 /* ===== FETCH ===== */
@@ -76,7 +76,7 @@ function openPopup(data) {
   document.getElementById("popup-title").textContent = data.title;
   document.getElementById("popup-desc").textContent = data.desc || "";
   document.getElementById("popup-version").textContent = data.version || "";
-  document.getElementById("popup-download").href = data.download || "#";
+  document.getElementById("popup-download").href = config.downloadPath + data.download || "#";
 
   const gallery = document.getElementById("popup-gallery");
   gallery.innerHTML = "";
