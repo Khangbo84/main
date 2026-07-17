@@ -2,7 +2,7 @@ let packs=[];
 const grid=document.getElementById("grid");
 const search=document.getElementById("search");
 const filter=document.getElementById("filter");
-
+const config ={"imgPath":"../banner/bg/"}
 /* ===== Fetch ===== */
 fetch("configuration/wallpapers.json")
 .then(r=>r.json())
@@ -19,7 +19,7 @@ function render(list){
     const c=document.createElement("div");
     c.className="card";
     c.innerHTML=`
-      <img src="${p.image}" alt="${p.title}">
+      <img src="${config.imgPath+p.image}" alt="${p.title}">
       <div class="card-body">
         <span class="type ${p.type}">${p.type}</span>
         <h3>${p.title}</h3>
