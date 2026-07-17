@@ -4,7 +4,7 @@ const search=document.getElementById("search");
 const filter=document.getElementById("filter");
 
 /* ===== Fetch ===== */
-fetch("wallpapers.json")
+fetch("configuration/wallpapers.json")
 .then(r=>r.json())
 .then(d=>{
   packs=d;
