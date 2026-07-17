@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>K Games Legends</title>
+    <link rel="stylesheet" href="menu.css">
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="header-top">
+            <div class="logo-btn" onclick="refreshPage()">
+                <!-- Thay logo.png bằng logo của bạn -->
+                <img src="logo.png" alt="Logo">
+                <h1>K Games Legends</h1>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="project-title">
+            <h2>Project of K Games</h2>
+            <p>Minecraft maps, Runestone Build, Games, Server events</p>
+        </div>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main>
+        <div class="card-list">
+
+            <div class="card" onclick="goToPage('maps')">
+                <div class="card-image">
+                    <img src="maps.jpg" alt="Minecraft Maps">
+                </div>
+                <div class="card-content">
+                    <h3>Minecraft Maps</h3>
+                    <p>Adventure, survival, minigames and story-driven maps.</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="goToPage('runestone')">
+                <div class="card-image">
+                    <img src="runestone.jpg" alt="Runestone Build">
+                </div>
+                <div class="card-content">
+                    <h3>Runestone Build</h3>
+                    <p>Fantasy builds, structures and creative architecture.</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="goToPage('games')">
+                <div class="card-image">
+                    <img src="games.jpg" alt="Games">
+                </div>
+                <div class="card-content">
+                    <h3>Games</h3>
+                    <p>Custom games, mechanics and interactive systems.</p>
+                </div>
+            </div>
+
+            <div class="card" onclick="goToPage('events')">
+                <div class="card-image">
+                    <img src="events.jpg" alt="Server Events">
+                </div>
+                <div class="card-content">
+                    <h3>Server Events</h3>
+                    <p>Community events, challenges and seasonal content.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        © 2026 K Games Legends  
+        <br>
+        <a href="#">Privacy Policy</a> |
+        <a href="#">Terms of Service</a> |
+        <a href="#">Contact</a>
+    </footer>
+
+    <!-- ===== SCRIPT ===== -->
+    <script scr="menu.js">
+    </script>
+
+</body>
+</html>
