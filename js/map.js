@@ -8,7 +8,7 @@ const config ={ "imgPath":"../banner/maps/", "galleryPath":"../gallery/maps/"}
 let currentCategory = "all";
 
 /* ===== FETCH ===== */
-fetch("configuration/maps.json")
+fetch("../configuration/maps.json")
 .then(r => r.json())
 .then(d => {
   packs = d;
@@ -84,7 +84,7 @@ function openPopup(data) {
   if (Array.isArray(data.gallery)) {
     data.gallery.forEach(src => {
       const img = document.createElement("img");
-      img.src = config.gallery + src;
+      img.src = config.galleryPath + src;
       img.onclick = () => openImage(src);
       gallery.appendChild(img);
     });
