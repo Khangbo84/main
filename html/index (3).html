@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trình tạo gói tài nguyên Minecraft (Việt hóa)</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #09090f, #1a1a2f, #29294f, #3b2a63, #1e1e2d);
+      background-size: 300% 300%;
+      animation: bgFlow 10s ease-in-out infinite alternate;
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    @keyframes bgFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      padding: 28px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      margin-top: 36px;
+    }
+
+    h1 { text-align: center; font-size: 26px; margin-bottom: 6px; font-weight: 700; }
+    .meta { text-align: center; color: rgba(255,255,255,0.85); margin-bottom: 14px; font-size: 15px; }
+
+    .credit { font-weight: 700; font-size: 15px; background: linear-gradient(90deg, #ff0000, #ff9900, #ffd700, #ff0000, #ff9900); background-size: 500%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: flame 8s linear infinite; text-align: center; }
+    @keyframes flame { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+
+    .upload-zone { border: 2px dashed rgba(255,255,255,0.18); padding: 18px; text-align: center; margin: 18px 0; border-radius: 12px; cursor: pointer; transition: all 0.22s ease; background: rgba(255,255,255,0.02); }
+    .upload-zone:hover { transform: translateY(-3px); background: rgba(255,255,255,0.03); }
+    .upload-zone.dragover { border-color: #90caf9; background: rgba(144,202,249,0.06); }
+
+    label, span { font-size: 16px; color: #eaf2ff; }
+    input[type="number"], select { padding: 8px; border-radius: 8px; border: none; outline: none; font-size: 15px; margin-top: 6px; }
+
+    .download-btn { background: linear-gradient(90deg, #00c3ff, #0078ff); color: white; font-weight: bold; padding: 12px 24px; border: none; border-radius: 10px; cursor: pointer; transition: transform 0.2s ease; }
+    .download-btn:hover { transform: scale(1.05); }
+
+    .music-note { color: #fff; font-family: "Segoe UI", Arial, sans-serif; font-size: 17px; line-height: 1.6; text-align: center; margin: 30px auto 20px auto; max-width: 600px; background: rgba(0, 0, 0, 0.3); padding: 15px 20px; border-radius: 12px; box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); }
+
+    .controls { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; margin: 25px 0; }
+    .controls label { font-weight: 600; font-size: 15px; color: #e0e0e0; text-shadow: 0 0 3px rgba(0,0,0,0.4); }
+
+    .controls input[type="number"], .controls select {
+      appearance: none; -webkit-appearance: none; -moz-appearance: none;
+      width: 250px; padding: 10px 14px; font-size: 16px; border: 1px solid #2a2a2a; border-radius: 10px; background-color: #1e1e1e; color: #fff; outline: none; box-shadow: inset 0 0 6px rgba(0,0,0,0.6); transition: all 0.25s ease;
+    }
+
+    .controls input[type="number"]:hover, .controls select:hover,
+    .controls input[type="number"]:focus, .controls select:focus { background-color: #292929; border-color: #00c3ff; box-shadow: 0 0 8px rgba(0, 195, 255, 0.4); }
+
+    .controls select option { background-color: #1e1e1e; color: #fff; }
+
+    @media (max-width: 600px) {
+      .controls { flex-direction: column; align-items: stretch; }
+      .controls input[type="number"], .controls select { width: 100%; font-size: 18px; }
+    }
+
+    #musicUpload { background: #1e1e1e; color: #fff; border: 1px solid #2a2a2a; border-radius: 10px; padding: 8px; width: 250px; cursor: pointer; transition: all 0.25s ease; }
+    #musicUpload:hover { background: #292929; border-color: #00c3ff; box-shadow: 0 0 8px rgba(0, 195, 255, 0.4); }
+
+    button { background: linear-gradient(90deg, #42a5f5, #5c6bc0); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-size: 16px; margin-top: 12px; transition: transform 0.18s, box-shadow 0.18s; font-weight: 700; }
+    button:hover { transform: scale(1.03); box-shadow: 0 6px 18px rgba(0,0,0,0.28); }
+    button:disabled { background: gray; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    #downloadBtn { display: none; background: linear-gradient(90deg, #66bb6a, #388e3c); }
+
+    .progress-container { margin-top: 14px; display: none; }
+    .progress-label { display:flex; justify-content:space-between; font-size:14px; color:rgba(255,255,255,0.9); }
+    .progress { width: 100%; height: 18px; background: rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; margin: 6px 0 10px; }
+    .progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg,#42a5f5,#5c6bc0); transition: width 0.25s ease; }
+    .progress-bar.pack { background: linear-gradient(90deg,#81c784,#388e3c); }
+
+    .status { margin-top: 6px; color: #e6f2ff; font-style: italic; }
+
+    #logBox { background: rgba(0,0,0,0.75); color: #b8f2b8; padding: 10px; font-size: 13px; height: 180px; overflow-y: auto; border-radius: 10px; margin-top: 16px; font-family: monospace; white-space: pre-line; }
+
+    footer { margin-top: 10px; font-size: 13px; color: rgba(255,255,255,0.8); text-align:center; }
+
+    a { color: #dff1ff; text-decoration: underline; }
+
+    /* ----------------
+       YouTube auto-ratio / click-to-load styles
+       ---------------- */
+    .yt-auto { width: 100%; max-width: 960px; margin: 14px auto; display: block; position: relative; }
+    .yt-inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .yt-thumb { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .yt-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .yt-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 3; display: flex; align-items: center; justify-content: center; width: 76px; height: 76px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; font-size: 28px; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.5); }
+    .yt-loading { display: none; position:absolute; left:10px; top:10px; font-size:12px; color:#ddd; z-index:4; background:rgba(0,0,0,0.3); padding:6px 8px; border-radius:6px; }
+    @media (max-width: 420px) { .yt-play { width:56px; height:56px; font-size:20px; } }
+
+    /* --- TERMS OF USE STYLE --- */
+    .terms-container { max-width: 700px; margin: 50px auto; padding: 25px; border-radius: 20px; background: linear-gradient(135deg, #1a1a1a, #2c2c2c); box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3); color: #fff; font-family: "Segoe UI", Arial, sans-serif; line-height: 1.6; backdrop-filter: blur(5px); }
+    .terms-container h3 {
+  font-size: 1.8em;
+  text-align: center;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #ffcc00, #ff4d4d, #ff7b00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textFlow 6s ease-in-out infinite;
+}
+    .terms-container ul { list-style-type: "✔ "; padding-left: 20px; }
+    .terms-container li { margin-bottom: 10px; }
+    .footer-note { text-align: center; margin-top: 20px; font-size: 0.9em; opacity: 0.8; color: #ddd; }
+    @keyframes textFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+    /* Language toggle button (top-right) */
+    #langToggle {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      backdrop-filter: blur(4px);
+    }
+    #langToggle:hover { transform: translateY(-2px); }
+
+  </style>
+</head>
+<body>
+  <button id="langToggle" aria-label="Toggle language">??🇳VI</button>
+
+  <div class="bg-animated" aria-hidden="true"></div>
+  <div class="container">
+    <h1 id="title">Trình tạo gói tài nguyên Minecraft (BetMC)</h1>
+    <div class="meta">
+      <span id="meta1">Kích thước đề xuất: ~15s ở 24fps (điện thoại có thể crash nếu quá nặng)</span>
+      <br><span id="meta2">Wallpaper: <a href="https://moewalls.com/" target="_blank">Moewall</a></span>
+    </div>
+
+    <div id="uploadZone" class="upload-zone">
+      <p id="uploadText">Kéo thả video vào đây hoặc nhấn để chọn</p>
+      <input type="file" id="fileInput" accept="video/*" style="display:none;">
+    </div>
+
+    <p class="music-note" id="musicNote">
+       Để gói tài nguyên của bạn phát âm thanh, hãy <b>bấm vào nút "DOWNLOAD MusicExtension"</b> ở dưới và xem video để biết cách gắn vào gói của bạn!
+    </p>
+
+    <!-- YouTube placeholder -->
+    <div class="yt-auto" data-video-id="3xW8UaAJJU4">
+      <div class="yt-inner" aria-hidden="true">
+        <div class="yt-loading">Đang tải ảnh...</div>
+      </div>
+    </div>
+    <noscript>
+      <div style="max-width:960px;margin:14px auto;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/3xW8UaAJJU4"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </noscript>
+
+    <button id="musicExtension" class="download-btn">DOWNLOAD MusicExtension</button>
+
+    <div class="controls">
+      <label id="musicUploadLabel" for="musicUpload">Chọn âm thanh menu (1–2 tệp .mp3/.ogg/.wav):</label><br>
+      <input type="file" id="musicUpload" accept="audio/*" multiple>
+    </div>
+
+    <div class="controls">
+      <div>
+        <label id="fpsLabel" for="fpsInput">FPS (khung hình/giây)</label><br>
+        <input type="number" id="fpsInput" min="1" max="120" value="24" style="width:110px;">
+      </div>
+
+      <div>
+        <label id="resolutionLabel" for="resolutionSelect">Độ phân giải</label><br>
+        <select id="resolutionSelect">
+          <option value="original">Gốc</option>
+          <option value="1080p">1080p (1920×1080)</option>
+          <option value="2160p">4K (3840×2160)</option>
+        </select>
+      </div>
+
+      <div style="flex:1"></div>
+
+      <div style="display:flex; gap:8px;">
+        <button id="startBtn" disabled>Tạo gói tài nguyên</button>
+        <button id="downloadBtn">Tải xuống</button>
+      </div>
+    </div>
+
+    <div class="progress-container" id="progressContainer">
+      <div class="progress-label">
+        <span id="frameLabel">Trích xuất khung hình</span>
+        <span id="frameProgress">0%</span>
+      </div>
+      <div class="progress"><div id="frameProgressBar" class="progress-bar"></div></div>
+
+      <div class="progress-label">
+        <span id="packLabel">Tạo gói tài nguyên</span>
+        <span id="packProgress">0%</span>
+      </div>
+      <div class="progress"><div id="packProgressBar" class="progress-bar pack"></div></div>
+
+      <div class="status" id="status">Sẵn sàng</div>
+    </div>
+
+    <div id="logBox">--- Console debug (hiện log & lỗi) ---</div>
+
+    <!-- Terms of Use Section -->
+    <section class="terms-container" id="termsContainer">
+      <h3 id="termsTitle">📜 Điều khoản sử dụng</h2>
+      <div id="termsContent">
+        <p>Khi sử dụng trang web này, bạn đồng ý rằng:</p>
+        <ul>
+          <li>Không sao chép hoặc phân phối lại mã nguồn mà không có sự cho phép.</li>
+          <li>Bạn có thể sử dụng các công cụ trên trang cho mục đích cá nhân, không cần sự cho phép.</li>
+          <li>Giữ nguyên "description" của gói bạn tạo.</li>
+          <li>Với các vấn đề phát sinh như lỗi,hãy liên hệ qua discord</li>
+        </ul>
+        <p class="footer-note">© 2025 BetMC Tools | Thiết kế và tối ưu bởi <strong>Khangbo84</strong>.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="credit">Created by: zaggvn</div>
+      <div class="credit">Tối ưu & Việt hoá bởi: Khangbo84</div>
+    </footer>
+  </div>
+
+<script>
+(function () {
+  const logBox = document.getElementById("logBox");
+  function appendLog(prefix, ...args) {
+    try {
+      const time = new Date().toLocaleTimeString();
+      const msg = args.map(a => {
+        try { return typeof a === 'string' ? a : JSON.stringify(a); } catch(e){ return String(a); }
+      }).join(' ');
+      logBox.textContent += `\n[${time}] ${prefix} ${msg}`;
+      logBox.scrollTop = logBox.scrollHeight;
+    } catch(e) { /* ignore */ }
+  }
+  const oldLog = console.log;
+  const oldErr = console.error;
+  console.log = function(...args) { oldLog.apply(console, args); appendLog('LOG:', ...args); };
+  console.error = function(...args) { oldErr.apply(console, args); appendLog('ERR:', ...args); };
+  window.onerror = function(msg, src, line, col, err) { appendLog('ERROR:', `${msg} (dòng ${line})`); };
+  window.addEventListener('unhandledrejection', function(ev){ appendLog('UNHANDLED REJECTION:', ev.reason); });
+})();
+
+const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+const startBtn = document.getElementById('startBtn');
+const downloadBtn = document.getElementById('downloadBtn');
+const progressContainer = document.getElementById('progressContainer');
+const frameProgressBar = document.getElementById('frameProgressBar');
+const frameProgress = document.getElementById('frameProgress');
+const packProgressBar = document.getElementById('packProgressBar');
+const packProgress = document.getElementById('packProgress');
+const status = document.getElementById('status');
+const fpsInput = document.getElementById('fpsInput');
+const resolutionSelect = document.getElementById('resolutionSelect');
+
+const BG_COMMON_GRID = { COLUMNS: 30, ROWS: 50, X_START: -1500, Y_START: -1500, STEP: 100 };
+const ANIM_GRID = { COLUMNS: 30, ROWS: 50, X_START: 1500, Y_START: 1500, STEP: 100 };
+
+uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+uploadZone.addEventListener('drop', (e) => {
+  e.preventDefault(); uploadZone.classList.remove('dragover');
+  const files = e.dataTransfer.files;
+  if (files.length > 0) { fileInput.files = files; startBtn.disabled = false; console.log('File đã chọn:', files[0].name); }
+});
+uploadZone.addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', () => {
+  startBtn.disabled = !fileInput.files.length;
+  if (fileInput.files.length) console.log('File selected:', fileInput.files[0].name);
+});
+
+async function createResizedFrame(blob, width, height) {
+  return new Promise((resolve, reject) => {
+    try {
+      const img = new Image();
+      img.onload = () => {
+        try {
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          canvas.toBlob((b) => {
+            if (!b) reject(new Error('Canvas.toBlob trả về null'));
+            else resolve(b);
+          }, 'image/jpeg', 0.9);
+        } catch(err) { reject(err); }
+      };
+      img.onerror = (e) => reject(new Error('Lỗi load ảnh khi resize: ' + e));
+      img.src = URL.createObjectURL(blob);
+    } catch(e) { reject(e); }
+  });
+}
+
+function randomHash(len = 32) {
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  let str = '';
+  for (let i = 0; i < len; i++) str += chars[Math.floor(Math.random() * chars.length)];
+  return str;
+}
+
+function calculateBGCommonOffset(index) {
+  const row = Math.floor(index / BG_COMMON_GRID.COLUMNS);
+  const col = index % BG_COMMON_GRID.COLUMNS;
+  const xOffset = BG_COMMON_GRID.X_START + (col * BG_COMMON_GRID.STEP);
+  const yOffset = BG_COMMON_GRID.Y_START + (row * BG_COMMON_GRID.STEP);
+  return [`${xOffset}%`, `${yOffset}%`];
+}
+
+function calculateAnimOffset(index) {
+  const row = Math.floor(index / ANIM_GRID.COLUMNS);
+  const col = index % ANIM_GRID.COLUMNS;
+  const xOffset = ANIM_GRID.X_START - (col * ANIM_GRID.STEP);
+  const yOffset = ANIM_GRID.Y_START - (row * ANIM_GRID.STEP);
+  return [`${xOffset}%`, `${yOffset}%`];
+}
+
+/* ============================
+   YouTube auto-ratio + click-to-load
+   ============================ */
+function initYoutubeAuto() {
+  document.querySelectorAll('.yt-auto').forEach(async (el) => {
+    try {
+      const videoId = el.dataset.videoId || el.dataset.id || null;
+      if (!videoId) return;
+      const inner = el.querySelector('.yt-inner') || (function(){
+        const d = document.createElement('div'); d.className='yt-inner'; el.appendChild(d); return d;
+      })();
+      const loading = inner.querySelector('.yt-loading');
+      const thumbs = [
+        `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+        `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`,
+        `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+        `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`,
+        `https://i.ytimg.com/vi/${videoId}/default.jpg`
+      ];
+
+      async function tryLoad(src) {
+        return await new Promise((res) => {
+          const img = new Image();
+          img.onload = () => res(img);
+          img.onerror = () => res(null);
+          img.src = src;
+        });
+      }
+
+      let goodImg = null;
+      for (const src of thumbs) {
+        const img = await tryLoad(src);
+        if (img && img.naturalWidth && img.naturalHeight) {
+          if (img.naturalWidth >= 200 && img.naturalHeight >= 120) {
+            goodImg = img;
+            break;
+          }
+          if (!goodImg) goodImg = img;
+        }
+      }
+
+      const fallbackUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+      const imgSrc = (goodImg && goodImg.src) ? goodImg.src : fallbackUrl;
+      const naturalW = (goodImg && goodImg.naturalWidth) ? goodImg.naturalWidth : 16;
+      const naturalH = (goodImg && goodImg.naturalHeight) ? goodImg.naturalHeight : 9;
+      const paddingPercent = (naturalH / naturalW) * 100;
+
+      el.style.position = 'relative';
+      el.style.display = 'block';
+      el.style.width = '100%';
+      el.style.paddingTop = paddingPercent + '%';
+
+      inner.style.position = 'absolute';
+      inner.style.inset = '0';
+      inner.innerHTML = '';
+
+      const thumbWrap = document.createElement('div');
+      thumbWrap.className = 'yt-thumb';
+      const thumbImg = document.createElement('img');
+      thumbImg.src = imgSrc;
+      thumbImg.alt = 'Video thumbnail';
+      thumbWrap.appendChild(thumbImg);
+      inner.appendChild(thumbWrap);
+
+      const play = document.createElement('div');
+      play.className = 'yt-play';
+      play.setAttribute('role','button');
+      play.setAttribute('aria-label','Play video');
+      play.textContent = '►';
+      inner.appendChild(play);
+
+      play.addEventListener('click', function () {
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.title = 'YouTube video player';
+        iframe.loading = 'lazy';
+        iframe.style.position = 'absolute';
+        iframe.style.top = '0';
+        iframe.style.left = '0';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.frameBorder = '0';
+        el.innerHTML = '';
+        el.appendChild(iframe);
+      }, { once: true });
+
+      if (loading) loading.style.display = 'none';
+    } catch (e) {
+      console.error('Lỗi initYoutubeAuto:', e);
+      if (el && el.dataset && el.dataset.videoId) {
+         el.innerHTML = `<iframe src="https://www.youtube.com/embed/${el.dataset.videoId}" style="position:absolute;inset:0;width:100%;height:100%;border:0" allowfullscreen></iframe>`;
+      }
+    }
+  });
+}
+// run
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initYoutubeAuto);
+} else {
+  initYoutubeAuto();
+}
+
+/* ============================
+   Language toggle (EN / VI)
+   - updates visible UI texts only (keeps internal alerts as-is)
+   ============================ */
+const translations = {
+  vi: {
+    title: "Trình tạo gói tài nguyên Minecraft (BetMC)",
+    meta1: "Kích thước đề xuất: ~15s ở 24fps (điện thoại có thể crash nếu quá nặng)",
+    meta2: 'Wallpaper: <a href="https://moewalls.com/" target="_blank">Moewall</a>',
+    uploadText: "Kéo thả video vào đây hoặc nhấn để chọn",
+    musicNote: ' Để gói tài nguyên của bạn phát âm thanh, hãy <b>bấm vào nút \"DOWNLOAD MusicExtension\"</b> ở dưới và xem video để biết cách gắn vào gói của bạn!',
+    musicUploadLabel: 'Chọn âm thanh menu (1–2 tệp .mp3/.ogg/.wav):',
+    fpsLabel: 'FPS (khung hình/giây)',
+    resolutionLabel: 'Độ phân giải',
+    resolutionOptions: ['Gốc', '1080p (1920×1080)', '4K (3840×2160)'],
+    startBtn: 'Tạo gói tài nguyên',
+    downloadBtn: 'Tải xuống',
+    frameLabel: 'Trích xuất khung hình',
+    packLabel: 'Tạo gói tài nguyên',
+    statusReady: 'Sẵn sàng',
+    musicExtensionBtn: 'DOWNLOAD MusicExtension',
+    termsTitle: '📜 Điều khoản sử dụng',
+    termsHTML: `<p>Khi sử dụng trang web này, bạn đồng ý rằng:</p>
+      <ul>
+        <li>Không sao chép hoặc phân phối lại mã nguồn mà không có sự cho phép.</li>
+        <li>Bạn có thể sử dụng các công cụ trên trang cho mục đích cá nhân, không cần sự cho phép.</li>
+        <li>Giữ nguyên "description" của gói bạn tạo.</li>
+        <li>Với các vấn đề phát sinh như lỗi, hãy liên hệ qua discord</li>
+      </ul>
+      <p class="footer-note">© 2025 BetMC Tools | Thiết kế và tối ưu bởi <strong>Khangbo84</strong>.</p>`
+  },
+  en: {
+    title: "Minecraft Resource Pack Creator (BetMC)",
+    meta1: "Recommended: ~15s at 24fps (mobile may crash if too heavy)",
+    meta2: 'Wallpaper: <a href="https://moewalls.com/" target="_blank">Moewall</a>',
+    uploadText: "Drag & drop a video here or click to choose",
+    musicNote: 'To make your resource pack play sound, click the "DOWNLOAD MusicExtension" button below and watch the video for installation instructions!',
+    musicUploadLabel: 'Choose menu audio (1–2 files .mp3/.ogg/.wav):',
+    fpsLabel: 'FPS (frames per second)',
+    resolutionLabel: 'Resolution',
+    resolutionOptions: ['Original', '1080p (1920×1080)', '4K (3840×2160)'],
+    startBtn: 'Generate Resource Pack',
+    downloadBtn: 'Download',
+    frameLabel: 'Extracting frames',
+    packLabel: 'Building resource pack',
+    statusReady: 'Ready',
+    musicExtensionBtn: 'DOWNLOAD MusicExtension',
+    termsTitle: '📜 Terms of Use',
+    termsHTML: `<p>By using this website you agree that:</p>
+      <ul>
+        <li>Do not copy or redistribute source code without permission.</li>
+        <li>You may use the tools for personal use without permission.</li>
+        <li>Keep the package "description" unchanged for packs you create.</li>
+        <li>For any issues (bugs), contact us via Discord.</li>
+      </ul>
+      <p class="footer-note">© 2025 BetMC Tools | Designed & optimized by <strong>Khangbo84</strong>.</p>`
+  }
+};
+
+function setLanguage(lang) {
+  try {
+    if (!translations[lang]) lang = 'vi';
+    localStorage.setItem('betmc_lang', lang);
+    const t = translations[lang];
+
+    document.getElementById('title').textContent = t.title;
+    document.getElementById('meta1').innerHTML = t.meta1;
+    document.getElementById('meta2').innerHTML = t.meta2;
+    document.getElementById('uploadText').textContent = t.uploadText;
+    document.getElementById('musicNote').innerHTML = t.musicNote;
+    document.getElementById('musicUploadLabel').textContent = t.musicUploadLabel;
+    document.getElementById('fpsLabel').textContent = t.fpsLabel;
+    document.getElementById('resolutionLabel').textContent = t.resolutionLabel;
+
+    // resolution select options
+    const opts = resolutionSelect.options;
+    for (let i = 0; i < opts.length && i < t.resolutionOptions.length; i++) {
+      opts[i].text = t.resolutionOptions[i];
+    }
+
+    document.getElementById('startBtn').textContent = t.startBtn;
+    document.getElementById('downloadBtn').textContent = t.downloadBtn;
+    document.getElementById('frameLabel').textContent = t.frameLabel;
+    document.getElementById('packLabel').textContent = t.packLabel;
+    document.getElementById('status').textContent = t.statusReady;
+    document.getElementById('musicExtension').textContent = t.musicExtensionBtn;
+
+    document.getElementById('termsTitle').textContent = t.termsTitle;
+    document.getElementById('termsContent').innerHTML = t.termsHTML;
+
+    // update lang toggle button label
+    const btn = document.getElementById('langToggle');
+    btn.textContent = (lang === 'en') ? '🇺🇸EN' : '🇻🇳VI'; // shows which language clicking will switch to
+    btn.title = (lang === 'en') ? 'Chuyển sang tiếng Việt' : 'Switch to English';
+  } catch (e) {
+    console.error('setLanguage error', e);
+  }
+}
+
+// init from localStorage or default
+(function(){
+  const saved = localStorage.getItem('betmc_lang') || (navigator.language && navigator.language.startsWith('en') ? 'en' : 'vi');
+  setLanguage(saved);
+  document.getElementById('langToggle').addEventListener('click', () => {
+    const current = localStorage.getItem('betmc_lang') || 'vi';
+    const next = current === 'en' ? 'vi' : 'en';
+    setLanguage(next);
+  });
+})();
+
+/* ============================
+   Main pack generation code (unchanged)
+   ============================ */
+startBtn.addEventListener('click', async () => {
+  try {
+    // 1. Kiểm tra video (Có sẵn)
+    if (!fileInput.files || fileInput.files.length === 0) { alert('Vui lòng chọn 1 file video'); return; }
+
+    // 2. CHẶN FILE KHÔNG PHẢI .OGG
+const musicFiles = document.getElementById("musicUpload")?.files;
+if (musicFiles && musicFiles.length > 0) {
+  for (let i = 0; i < musicFiles.length; i++) {
+    const fileName = musicFiles[i].name.toLowerCase();
+    if (!fileName.endsWith('.ogg')) {
+      const errorMsg = `Lỗi: File "${musicFiles[i].name}" không phải .ogg!\n\nBạn có muốn mở trang web chuyển đổi nhạc sang .ogg ngay bây giờ không?`;
+      
+      console.error(`Lỗi định dạng: ${musicFiles[i].name}. Yêu cầu .ogg để minecraft có thể đọc`);
+      
+      if (confirm(errorMsg)) {
+        window.open("https://convertio.co/vn/mp3-ogg/", "_blank");
+      }
+      return; // Luôn dừng tạo pack nếu sai định dạng
+    }
+  }
+}
+    
+ const fps = Math.max(1, Math.min(120, parseInt(fpsInput.value) || 24));
+    if (fps > 60) {
+      if (!confirm('⚠️ FPS cao (>60) có thể gây crash trên điện thoại. Tiếp tục?')) {
+        console.log('Người dùng hủy vì FPS cao');
+        return;
+      }
+    }
+
+    console.log('Số FPS mong muốn:', fps);
+
+    const video = document.createElement('video');
+    video.muted = true;
+    video.preload = 'metadata';
+    video.src = URL.createObjectURL(fileInput.files[0]);
+
+    await new Promise((resolve, reject) => {
+      let onLoaded = () => resolve();
+      let onErr = (e) => reject(new Error('Lỗi load video: ' + e));
+      video.onloadedmetadata = onLoaded;
+      video.onerror = onErr;
+      setTimeout(() => { if (video.duration && video.videoWidth) resolve(); }, 800);
+    });
+
+    console.log('Video info:', { duration: video.duration, width: video.videoWidth, height: video.videoHeight });
+
+    let totalFrames = Math.ceil(video.duration * fps);
+    const maxFrames = BG_COMMON_GRID.COLUMNS * BG_COMMON_GRID.ROWS;
+    if (totalFrames > maxFrames) {
+      console.warn(`Video có nhiều frame (${totalFrames}) hơn grid (${maxFrames}). Giới hạn ${maxFrames} frame.`);
+      totalFrames = maxFrames;
+    }
+
+    startBtn.disabled = true;
+    downloadBtn.style.display = 'none';
+    progressContainer.style.display = 'block';
+    frameProgressBar.style.width = '0%';
+    packProgressBar.style.width = '0%';
+    frameProgress.textContent = '0%';
+    packProgress.textContent = '0%';
+    status.textContent = translations[localStorage.getItem('betmc_lang') || 'vi'].statusReady || 'Sẵn sàng';
+    console.log('Bắt đầu trích xuất', totalFrames, 'frames');
+
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth || 1920;
+    canvas.height = video.videoHeight || 1080;
+    const ctx = canvas.getContext('2d');
+    const frames = [];
+
+    const startTime = performance.now();
+
+    for (let i = 0; i < totalFrames; i++) {
+      try {
+        await new Promise((resolve, reject) => {
+          video.currentTime = i / fps;
+          const onSeeked = () => {
+            try {
+              ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+              canvas.toBlob((blob) => {
+                if (!blob) { reject(new Error('canvas.toBlob returned null for frame ' + i)); }
+                else {
+                  frames.push({ name: `frame_${i.toString().padStart(4,'0')}.png`, blob });
+                  const progress = ((i + 1) / totalFrames) * 100;
+                  frameProgressBar.style.width = `${progress}%`;
+                  frameProgress.textContent = `${Math.floor(progress)}%`;
+                  if ((i+1) % 20 === 0) console.log(`Đã trích xuất ${i+1} / ${totalFrames} frames`);
+                  resolve();
+                }
+              }, 'image/png');
+            } catch(err) { reject(err); }
+          };
+          video.onseeked = onSeeked;
+          video.onerror = (e) => reject(new Error('Lỗi khi seek video: ' + e));
+        });
+      } catch(ex) {
+        console.error('Lỗi khi trích xuất frame', i, ex);
+        alert('Lỗi khi trích xuất khung hình: ' + ex.message);
+        startBtn.disabled = false;
+        status.textContent = 'Đã xảy ra lỗi khi trích xuất';
+        return;
+      }
+    }
+
+    console.log('Hoàn tất trích xuất frames:', frames.length);
+    status.textContent = 'Đang tạo gói tài nguyên...';
+    const packStart = performance.now();
+
+    const zip = new JSZip();
+
+    const manifest = {
+      format_version: 2,
+      header: {
+        description: "modified by K Game Legends \n>§4Requires BetMC 1.2+\n§fLink:§bhttps://khangbo84maps.my.canva.site/khangbo84maps",
+        name: "BG_animation_for_BetMc",
+        uuid: crypto.randomUUID ? crypto.randomUUID() : randomHash(16),
+        version: [1,0,0],
+        min_engine_version: [1,16,0]
+      },
+      subpacks: [
+        { "folder_name": "0", "name": "OFF", "memory_tier": 0 },
+        { "folder_name": "1080", "name": "ON", "memory_tier": 0 }
+      ],
+      modules: [
+        { description: "Resource pack cho nền động BetMC", type: "resources", uuid: crypto.randomUUID ? crypto.randomUUID() : randomHash(16), version: [1,0,0] }
+      ]
+    };
+    zip.file("manifest.json", JSON.stringify(manifest, null, 2));
+    packProgressBar.style.width = '10%'; packProgress.textContent = '10%';
+    console.log("Đã tạo manifest");
+
+    packProgressBar.style.width = '20%'; packProgress.textContent = '20%';
+
+    const config0 = { "namespace": "betmc_config", "betmc_main_config": { "$betmc_scr_backround_path": "betmc_background/betmc_background_static_patch" } };
+    const config1080 = {
+      "namespace": "betmc_config",
+      "betmc_main_config": {
+        "$use_background_static_customs": false,
+        "$use_setting_background_static_customs": false,
+        "$use_background_animation": true
+      }
+    };
+    zip.file("subpacks/0/betmc_config/config.json", JSON.stringify(config0, null, 2));
+    zip.file("subpacks/1080/betmc_config/config.json", JSON.stringify(config1080, null, 2));
+    packProgressBar.style.width = '30%'; packProgress.textContent = '30%';
+    console.log("Đã tạo config");
+
+    const uiDefs = {
+      "namespace": "betmc_background",
+      "betmc_animation_background_frame@betmc_common.empty_panel": {
+        "anims": ["@p5jieh6d819mtqt5qpg4ifu64eiv0289.betmc_background-js:17:19"],
+        "controls": [],
+        "size": ["100%", "100%"],
+        "offset": "@p5jieh6d819mtqt5qpg4ifu64eiv0289.betmc_background-js:17:19",
+        "anchor_from": "center",
+        "anchor_to": "center"
+      }
+    };
+
+    for (let i = 0; i < frames.length; i++) {
+      const hash = randomHash(32);
+      const controlKey = `${hash}@betmc_background.betmc_background-js:43:31${i === 0 ? '' : `[${i}]`}`;
+      uiDefs["betmc_animation_background_frame@betmc_common.empty_panel"].controls.push({ [controlKey]: {} });
+      const [xOffset, yOffset] = calculateBGCommonOffset(i);
+      uiDefs[`betmc_background-js:43:31${i === 0 ? '' : `[${i}]`}`] = {
+        "type": "image",
+        "texture": `betmc_background/betmc_background_frame/betmc_img_${i+1}_frame`,
+        "fill": true,
+        "size": ["100%","100%"],
+        "offset": [xOffset, yOffset]
+      };
+    }
+
+    zip.file("ui/_ui_defs.json", JSON.stringify({ "ui_defs": ["betmc_ui/betmc_common/p5jieh6d819mtqt5qpg4ifu64eiv0289"] }, null, 2));
+    zip.file("betmc_ui/betmc_common/betmc_bg_common.json", JSON.stringify(uiDefs, null, 2));
+    packProgressBar.style.width = '40%'; packProgress.textContent = '40%';
+    console.log("Đã tạo ui_defs")
+
+    const animNamespace = "p5jieh6d819mtqt5qpg4ifu64eiv0289";
+    const animObj = { namespace: animNamespace };
+    const animKeyBase = "betmc_background-js:17:19";
+    const animDuration = 1 / fps;
+
+    for (let i = 0; i < frames.length; i++) {
+      const [xOffset, yOffset] = calculateAnimOffset(i);
+      const key = i === 0 ? animKeyBase : `${animKeyBase}-${i}`;
+      const nextKey = i + 1 < frames.length ? `@${animNamespace}.${animKeyBase}-${i+1}` : `@${animNamespace}.${animKeyBase}`;
+      animObj[key] = {
+        from: [xOffset, yOffset],
+        to: [xOffset, yOffset],
+        next: nextKey,
+        anim_type: "offset",
+        duration: animDuration
+      };
+    }
+    zip.file(`betmc_ui/betmc_common/${animNamespace}`, JSON.stringify(animObj, null, 2));
+
+    let framesAdded = 0;
+    for (const frame of frames) {
+      try {
+        let frameBlob = frame.blob;
+        const selectedResolution = resolutionSelect.value;
+        if (selectedResolution === '1080p') {
+          frameBlob = await createResizedFrame(frame.blob, 1920, 1080);
+        } else if (selectedResolution === '2160p') {
+          frameBlob = await createResizedFrame(frame.blob, 3840, 2160);
+        }
+        zip.file(`subpacks/1080/betmc_background/betmc_background_frame/betmc_img_${framesAdded+1}_frame.jpg`, frameBlob);
+        framesAdded++;
+        const progress = (framesAdded / frames.length) * 50 + 40;
+        packProgressBar.style.width = `${progress}%`;
+        packProgress.textContent = `${Math.floor(progress)}%`;
+        if (framesAdded % 30 === 0) console.log(`Đã thêm ${framesAdded}/${frames.length} frames vào zip`);
+      } catch(ex) {
+        console.error('Lỗi khi thêm frame vào zip:', ex);
+        alert('Lỗi khi xử lý ảnh trước khi nén: ' + ex.message);
+        startBtn.disabled = false;
+        status.textContent = 'Lỗi khi thêm frame vào gói';
+        return;
+      }
+    }
+
+    try {
+      const iconBlob = frames[0].blob;
+      zip.file("pack_icon.png", iconBlob);
+      zip.file("subpacks/0/betmc_background/betmc_background_static_patch.jpg", iconBlob);
+      packProgressBar.style.width = '95%';
+      packProgress.textContent = '95%';
+    } catch (e) {
+      console.error('Lỗi khi thêm pack_icon:', e);
+    }
+
+    try {
+      const musicFiles = document.getElementById("musicUpload")?.files;
+      if (musicFiles && musicFiles.length > 0) {
+        const soundFolder = "sounds/music/menu/";
+        const addMusicFile = (targetName, sourceFile) => {
+          zip.file(`${soundFolder}${targetName}.ogg`, sourceFile);
+        };
+
+        if (musicFiles.length === 1) {
+          for (let i = 1; i <= 4; i++) addMusicFile(`menu${i}`, musicFiles[0]);
+        } else if (musicFiles.length === 2) {
+          for (let i = 1; i <= 2; i++) addMusicFile(`menu${i}`, musicFiles[0]);
+          for (let i = 3; i <= 4; i++) addMusicFile(`menu${i}`, musicFiles[1]);
+        }
+      }
+
+      try {
+        console.log('Bắt đầu nén zip (có thể mất thời gian)...');
+        const content = await zip.generateAsync({
+          type: "blob",
+          compression: "DEFLATE",
+          compressionOptions: { level: 9 }
+        });
+
+        packProgressBar.style.width = '100%';
+        packProgress.textContent = '100%';
+        const packTime = ((performance.now() - packStart) / 1000).toFixed(1);
+        status.textContent = `Đã tạo gói thành công trong ${packTime}s!`;
+        console.log('Zip đã tạo xong, blob size:', content.size || '(k/c)');
+
+        const url = URL.createObjectURL(content);
+        downloadBtn.onclick = () => {
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'BG_animation_for_BetMc.mcpack';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        };
+
+        downloadBtn.style.display = 'inline-block';
+        console.log('Nút tải đã hiển thị');
+
+        try { downloadBtn.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { console.log("abc", e); }
+      } catch (zipErr) {
+        console.error('Lỗi khi nén zip:', zipErr);
+        alert('Lỗi khi nén gói: ' + (zipErr.message || zipErr));
+        status.textContent = 'Lỗi khi nén gói tài nguyên';
+        startBtn.disabled = false;
+        return;
+      }
+
+      const totalTime = ((performance.now() - startTime) / 1000).toFixed(1);
+      console.log('Toàn bộ quá trình hoàn tất trong', totalTime, 'giây');
+      startBtn.disabled = false;
+    } catch (errMain) {
+      console.error('Lỗi chính:', errMain);
+      alert('Đã xảy ra lỗi: ' + (errMain.message || errMain));
+      status.textContent = 'Đã xảy ra lỗi';
+      startBtn.disabled = false;
+    }
+  } catch (errRoot) {
+    console.error('Lỗi root:', errRoot);
+    alert('Đã xảy ra lỗi khởi tạo: ' + (errRoot.message || errRoot));
+    status.textContent = 'Đã xảy ra lỗi khởi tạo';
+    startBtn.disabled = false;
+  }
+});
+
+document.getElementById('musicExtension').onclick = function() {
+  const url = "https://github.com/Khangbo84/Music-Extension/raw/refs/heads/main/MusicExtension.zip";
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'MusicExtension.zip';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+};
+</script>
+</body>
+</html>
