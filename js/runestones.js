@@ -1,6 +1,6 @@
     window.onerror = function(msg, url, line, col, err){ console.error('window.onerror', {msg,url,line,col, stack: err && err.stack}); }; window.addEventListener('unhandledrejection', e=>console.error('unhandledrejection', e.reason && e.reason.stack ? e.reason.stack : e.reason));
 let builds = [];
-const config={"imgPath":"../banner/runestones/","downloadPath":"../download/runestones/"}
+const config={"imgPath":"../banner/runestones/"}
 fetch('../configuration/builds.json')
   .then(res => res.json())
   .then(data => {
@@ -48,7 +48,7 @@ function openPopup(i){
   popupImage.src=config.imgPath + b.image; popupImage.alt=b.title;
   popupTitle.innerText=b.title;
   popupDesc.innerText=b.desc;
-  popupDownload.href=config.downloadPath + b.download;
+  popupDownload.href=b.download;
   overlay.classList.add('active');
 }
 function closePopup(e){ if(!e||e.target.id==='overlay')overlay.classList.remove('active'); }
