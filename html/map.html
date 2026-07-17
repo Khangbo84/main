@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K Games Minecraft Project</title>
+  <link rel="stylesheet" href="map.css">
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <h1>K Games Minecraft Project</h1>
+  <p>Maps • Addons • Textures</p>
+</header>
+
+<!-- ===== CONTROLS ===== -->
+<div class="controls">
+
+  <input id="search" placeholder="Search by name or type...">
+
+  <select id="filter">
+    <option value="all">All types</option>
+    <option value="parkours">Parkours</option>
+    <option value="adventure">Adventure</option>
+    <option value="anime">Anime</option>
+    <option value="weapon">Weapon</option>
+  </select>
+
+</div>
+
+<!-- ===== CATEGORY ===== -->
+<div class="category-filter">
+  <button data-cat="all" class="active">All</button>
+  <button data-cat="map">Maps</button>
+  <button data-cat="addon">Addons</button>
+  <button data-cat="texture">Textures</button>
+</div>
+
+<!-- ===== GRID ===== -->
+<div id="grid" class="grid"></div>
+
+
+<!-- ===== POPUP ===== -->
+<div id="popup" class="popup hidden">
+  <div class="popup-overlay"></div>
+
+  <div class="popup-box">
+    <button class="popup-close">✕</button>
+
+    <img id="popup-cover" class="popup-cover">
+
+    <div class="popup-content">
+      <h2 id="popup-title"></h2>
+      <p id="popup-desc"></p>
+
+      <div id="popup-gallery" class="popup-gallery"></div>
+
+      <p id="popup-version"></p>
+
+      <a id="popup-download" class="popup-download" target="_blank">
+        Download
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== IMAGE VIEWER ===== -->
+<div id="imgViewer" class="img-viewer hidden">
+  <div class="img-overlay"></div>
+  <img id="imgViewerSrc">
+</div>
+
+<script src="map.js"></script>
+</body>
+</html>

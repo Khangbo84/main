@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>3rd Anniversary</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="MePhuHo TEAM 3rd Anniversary">
+<meta property="og:description" content="A special Minecraft Bedrock event celebrating 3 years together.">
+<meta property="og:image" content="https://khangbo84.github.io/server-events/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://khangbo84.github.io/server-events/">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" type="image/png" href="favicon.png" sizes="64x64">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="server.css">
+</head>
+
+<body>
+<header class="header">
+  <div class="header-inner">
+
+    <!-- LOGO -->
+    <div class="header-logo">
+      <img src="title.png" alt="Server Logo">
+    </div>
+
+    <!-- MENU -->
+    <nav class="header-nav">
+      <a href="#" data-action="play">
+        <img src="play.png" alt="">
+      </a>
+
+      <a href="#" data-action="map">
+        <img src="map.png" alt="">
+      </a>
+
+      <a href="#" data-action="games">
+        <img src="game.png" alt="">
+      </a>
+
+      <a href="#" data-action="wiki">
+        <img src="wiki.png" alt="">
+      </a>
+
+      <button id="menuBtn" class="btn-menu" aria-label="Mở menu">
+        <div class="menu-icon"></div>
+      </button>
+    </nav>
+
+  </div>
+</header>
+
+<!-- EVENTS -->
+<section class="events">
+  <img class="events-bg" src="server_bg.png" alt="">
+  <img class ="title" src="title.png" alt="Logo">
+
+  <!-- Discord button: sử dụng PNG -->
+  <a class="btn btn-discord" href="#" aria-label="Discord">
+    <img src="discord.png" alt="Discord Icon" aria-hidden="true">
+    <span>Discord</span>
+  </a>
+
+  <a data-i18n="play" class="btn btn-play" href="#">Chơi</a>
+</section>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Side Panel -->
+<aside class="side-panel" id="sidePanel">
+
+  <div class="panel-header">
+    <h3 data-i18n="content">Nội dung</h3>
+  </div>
+
+  <div class="panel-content">
+    <button data-i18n="play" class="panel-btn">Chơi</button>
+    <button data-i18n="map" class="panel-btn">Bản đồ</button>
+    <button data-i18n="games" class="panel-btn">Trò chơi</button>
+    <button data-i18n="wiki" class="panel-btn">Wiki</button>
+
+    <!-- Language -->
+    <div class="lang-box">
+      <button data-i18n="language" class="panel-btn" id="langToggle">
+        Ngôn ngữ
+      </button>
+
+      <div class="lang-dropdown" id="langDropdown">
+        <button data-i18n="en_lang" data-lang="en">Tiếng Anh</button>
+        <button data-i18n="vi_lang" data-lang="vi">Tiếng Việt</button>
+      </div>
+    </div>
+
+  </div>
+</aside>
+
+<!-- SECTIONS -->
+<section class="section lobby">
+  <div class="text">
+    <img src="lobby.jpg" alt="Lobby">
+    <h2 data-i18n="lobby_title">Sảnh</h2>
+    <p data-i18n="lobby_desc">Khu trung tâm nơi người chơi bắt đầu hành trình của mình. Bạn đã sẵn sàng khám phá bữa tiệc này chưa?</p>
+  </div>
+</section>
+
+<section class="section games">
+  <div class="text">
+    <h2 data-i18n="games_title">Trò chơi</h2>
+    <p data-i18n="games_desc">Với 3 mini games đa dạng, độc đáo là: Mê cung tử thần, Bùng phát ngược và Tháp phản bội. Đem lại trải nghiệm mới lạ và hấp dẫn!</p>
+  </div>
+  <img src="games.jpg" alt="Games">
+</section>
+
+<section class="section stall">
+  <div class="text">
+    <h2 data-i18n="stall_title">Gian hàng</h2>
+    <p data-i18n="stall_desc">Khu gian hàng với nền ẩm thực độc đáo, những trang bị xịn xò. Tới đây mua cho mình những trang bị và vật phẩm bằng phiếu sự kiện. Ngoài ra còn có khu...</p>
+  </div>
+  <img src="stall.jpg" alt="Stall">
+</section>
+
+<section class="section stage">
+  <div class="text">
+    <h2 data-i18n="stage_title">Sân khấu</h2>
+    <p data-i18n="stage_desc">Sân khấu chính cho sự kiện, cho buổi khai mạc hoành tráng với đấu trường võ thuật</p>
+  </div>
+  <img src="stage.jpg" alt="Stage">
+</section>
+
+<section class="section dungeon">
+  <div class="text">
+    <h2 data-i18n="dungeon_title">Hầm ngục</h2>
+    <p data-i18n="dungeon_desc">Thử thách cuối cùng dành cho người chơi dũng cảm. Khám phá hầm ngục với muôn ngàn thử thách, thám hiểm, đánh trùm. Đem về chiến lợi phẩm ngay</p>
+  </div>
+  <img src="dungeon.jpg" alt="Dungeon">
+</section>
+
+<!-- Suggest -->
+<section class="suggest-section">
+  <h3 data-i18n="suggest_title">Tiếp theo là?</h3>
+
+  <div class="suggest-links">
+    <a data-i18n="games" href="#">Trò chơi</a>
+    <a data-i18n="map" href="#">Bản đồ</a>
+    <a data-i18n="dungeon_title" href="#">Hầm ngục</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <!-- TOP -->
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="logo.png" alt="K Games Legends" class="footer-logo">
+    </div>
+
+   <div class="footer-team">
+      <img src="team.png" alt="MePhuHo Team">
+    </div>
+  </div>
+
+  <!-- LINKS -->
+  <div class="footer-links">
+
+    <div class="footer-col">
+      <h4>Links</h4>
+      <a href="#">PROJECT</a>
+      <a href="#">Wiki</a>
+      <a href="#">FAQ</a>
+      <a href="#">FEEDBACK</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Page</h4>
+      <a data-i18n="play" href="#">Chơi</a>
+      <a data-i18n="map" href="#">Bản đồ</a>
+      <a data-i18n="games" href="#">Trò chơi</a>
+      <a data-i18n="rule" href="#">Luật</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>About</h4>
+      <a data-i18n="terms" href="#">Điều khoản & Pháp lý</a>
+    </div>
+
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="footer-divider"></div>
+
+  <!-- COPYRIGHT -->
+  <div class="footer-bottom">
+    <p>©2026 <span>K GAMES LEGENDS</span>. ALL RIGHTS RESERVED.</p>
+  </div>
+
+  <!-- SOCIAL -->
+  <div class="footer-social">
+    <a href="#"><i class="icon discord"></i></a>
+    <a href="#"><i class="icon youtube"></i></a>
+    <a href="#"><i class="icon mail"></i></a>
+    <a href="#"><i class="icon tiktok"></i></a>
+  </div>
+
+</footer>
+
+    <script scr="server.js">
+    </script>
+</body>
+</html>

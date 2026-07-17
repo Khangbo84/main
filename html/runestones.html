@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Runestone Build</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="runestones.css">
+</head>
+<body>
+<header>
+  <h1>Runestone Build</h1>
+  <p>Tải về các công trình holoprint miễn phí!</p>
+  <input id="search" placeholder="Tìm kiếm công trình...">
+  <select id="typeFilter">
+  <option value="all">All Types</option>
+  <option value="official">Official</option>
+  <option value="free">Free</option>
+  <option value="bundle">Bundle</option>
+  <option value="gold_ad">Gold / Ads</option>
+  </select>
+</header><section class="grid" id="grid"></section><div class="overlay" id="overlay" onclick="closePopup(event)">
+  <div class="popup">
+    <img id="popupImage" alt="">
+    <div class="popup-content">
+      <h2 id="popupTitle"></h2>
+      <p id="popupDesc"></p>
+      <a id="popupDownload" class="btn download" target="_blank">Download</a>
+      <div class="btn close" onclick="closePopup()">Đóng</div>
+    </div>
+  </div>
+</div>
+  <section class="faq-section">
+  <h1>Câu hỏi thường gặp</h1>
+  <h2>1.Runestone Build là gì?</h2>
+  <p>Trả lời: Runestone Build là một website thuộc <strong>K Games Legends</strong>,giúp tải các công trình holoprint của chúng tôi một cách hoàn toàn miễn phí và mãi mãi!</p>
+  <h2>2.Holoprint là gì?</h2>
+  <p>Trả lời:Holoprint là một công cụ tạo Addon công trình dựa trên structure,sử dụng armor stand sẽ xuất hiện công trình ảo để xây dựng theo</p>
+  <h2>3.Vậy Runestone Build được lợi ích gì?</h2>
+  <p>Trả lời:Runestone Build cung cấp các công trình chia làm 2 loại: 1 là free và 2 là bundle/gold ad.Với loại 1 chúng tôi không có lợi nhuận,còn loại 2 chúng tôi sử dụng phương thức vượt link để nhận tiền từ quảng cáo</p>
+  <h2>4.Vậy bundle và gold ad có miễn phí không?</h2>
+  <p>Trả lời:<strong>Có!</strong> Bundle và Gold Ad đều miễn phí nhưng bạn cần bỏ ra chút thời gian vượt link để ủng hộ chúng tôi</p>
+  </section>
+  <footer class="site-footer minimal">
+  © 2025 <strong>Runestone</strong> — All builds are handcrafted with magic.
+  </footer>
+  <script scr="runestones.js">
+</script>
+</body>
+</html>
