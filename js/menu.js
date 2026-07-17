@@ -5,7 +5,7 @@
         function goToPage(page) {
             switch (page) {
                 case 'maps':
-                    window.location.href = "https://example.com/maps";
+                    window.location.href = "khangbo84.github.io/main/maps";
                     break;
                 case 'runestone':
                     window.location.href = "https://example.com/runestone";
