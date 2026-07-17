@@ -1,6 +1,6 @@
     window.onerror = function(msg, url, line, col, err){ console.error('window.onerror', {msg,url,line,col, stack: err && err.stack}); }; window.addEventListener('unhandledrejection', e=>console.error('unhandledrejection', e.reason && e.reason.stack ? e.reason.stack : e.reason));
 let builds = [];
-
+const config={"imgPath":"../banner/runestones/"}
 fetch('configuration/builds.json')
   .then(res => res.json())
   .then(data => {
@@ -16,7 +16,7 @@ function render(list){
     card.className='card';
     card.onclick=()=>openPopup(i);
     card.innerHTML = `
-  <img src="${b.image}" alt="${b.title}">
+  <img src="${config.imgPath + b.image}" alt="${b.title}">
   <div class="card-body">
     <span class="badge ${b.type}">
       ${formatType(b.type)}
@@ -45,7 +45,7 @@ function formatType(type) {
     
 function openPopup(i){
   const b = builds[i];
-  popupImage.src=b.image; popupImage.alt=b.title;
+  popupImage.src=config.imgPath + b.image; popupImage.alt=b.title;
   popupTitle.innerText=b.title;
   popupDesc.innerText=b.desc;
   popupDownload.href=b.download;
