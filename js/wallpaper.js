@@ -4,7 +4,7 @@ const search=document.getElementById("search");
 const filter=document.getElementById("filter");
 const config ={"imgPath":"../banner/bg/"}
 /* ===== Fetch ===== */
-fetch("configuration/wallpapers.json")
+fetch("../configuration/wallpapers.json")
 .then(r=>r.json())
 .then(d=>{
   packs=d;
