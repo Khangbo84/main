@@ -14,7 +14,13 @@
                     window.location.href = "https://khangbo84.github.io/main/html/games";
                     break;
                 case 'events':
-                    window.location.href = "https://khangbo84.github.io/main/html/events";
+                    window.location.href = "https://khangbo84.github.io/main/html/server.html";
+                    break;
+                case 'betmc':
+                    window.location.href = "https://khangbo84.github.io/main/html/bg_gen.html";
+                    break;
+                case 'wallpaper':
+                    window.location.href = "https://khangbo84.github.io/main/html/wallpaper.html";
                     break;
             }
         }
