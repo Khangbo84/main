@@ -1,0 +1,130 @@
+[
+  {
+    "title": "Parkour 25 levels (v2.3)",
+    "desc": "Parkour 25 levels with different terrains and biomes ,the final level has a tower and Easter eggs for you to explore. Download now!\nWarning:This is a template world so after importing click create",
+    "category": "map",
+    "type": "parkours",
+    "image": "parkour_25_levels.jpg",
+
+    "gallery": [
+      "p25l_img1.png",
+      "p25l_img2.png",
+      "p25l_img3.png",
+      "p25l_img4.png",
+      "p25l_img5.png",
+      "p25l_img6.png"
+    ],
+
+    "version": "Minecraft Bedrock 1.21.30",
+    "download": "parkour-25-levels-2-3.mctemplate"
+  },
+  {
+    "title": "Dimensions Spiral",
+    "desc": "DIMENSION SPIRAL have 3 spiral with different biome and theme.Also map have many features like:lava rising,snake parkour and lava boots.Download now!\nWarning:\nThis map is a template map so after importing the map please click CREATE\nMin Version Map:1.20.80",
+    "category": "map",
+    "type": "parkours",
+    "image": "dimensions_spiral.jpg",
+
+    "gallery": [
+      "ds_img1.png",
+      "ds_img2.png",
+      "ds_img3.png",
+      "ds_img4.png",
+      "ds_img5.png",
+      "ds_img6.png",
+      "ds_img7.png"
+    ],
+
+    "version": "Minecraft Bedrock 1.21.80+",
+    "download": "dimension-spiral-v1-1.mctemplate"
+  },
+  {
+    "title": "1st Anniversary Parkour",
+    "desc": "This map is a Update of Parkour 25 levels on my 1 year parkour anniversary\nThe map has had some upgraded and improved levels:\n-Birch Forest\n-Parkour in the wall\n-Down the well\n...\nMin version:1.21.70\nWarning:This map is a template so after import please click CREATE and scroll down",
+    "category": "map",
+    "type": "parkours",
+    "image": "1st_anniversary_parkour.jpg",
+
+    "gallery": [
+      "1st_1.png",
+      "1st_2.png",
+      "1st_3.png",
+      "1st_4.png",
+      "1st_5.png",
+      "1st_6.png"
+    ],
+
+    "version": "Minecraft Bedrock 1.21.120+",
+    "download": "1st-anniversary-parkour.mctemplate"
+  },
+  {
+    "title": "The Summer Island",
+    "desc": "The Summer Island is one of four season maps. With many terrains, the summer-themed biome will bring you a great experience.\nMAP BY:Khangbo84\nHelper:Zpizz\nWARNING:\nNO CHECKPOINT IN THIS MAP!!!!!\nAND THIS MAP IS A TEMPLATE SO AFTER IMPORT MAP CLICK CREATE NEW WORLD",
+    "category": "map",
+    "type": "parkours",
+    "image": "the_summer_island.jpg",
+
+    "gallery": [
+      "tsi_1.png",
+      "tsi_2.png"
+    ],
+
+    "version": "Minecraft Bedrock 1.21.70+",
+    "download": "the-summer-island.mctemplate"
+  },
+  {
+    "title": "The Autumn Island",
+    "desc": "The Autumn Island is second season map.In the map, you can listen to music, choose day or night, can pvp or not and more....",
+    "category": "map",
+    "type": "parkours",
+    "image": "the_autumn_island.jpg",
+
+    "gallery": [
+      "autumn_1.png",
+      "autumn_2.png",
+      "autumn_3.png",
+      "autumn_4.png",
+      "autumn_6.png"
+    ],
+
+    "version": "Minecraft Bedrock 1.21.120+",
+    "download": "the-autumn-island.mctemplate"
+  },
+  {
+    "title": "Parkour 25 levels 2",
+    "desc": "Parkour 25 Levels 2 Is the sequel to Parkour 25 Levels There are new features such as: music, TNT explosions, moving camera effects...There are also 5 Easter eggs. Can you find them?Have fun!!!\nWARNING⚠️:THIS MAP IS A TEMPLATE SO AFTER IMPORT PLEASE CLICK CREATE",
+    "category": "map",
+    "type": "parkours",
+    "image": "parkour_25_levels_2.jpg",
+
+    "gallery": [
+      "p25l-2_1.png",
+      "p25l-2_2.png",
+      "p25l-2_3.png",
+      "p25l-2_4.png",
+      "p25l-2_5.png",
+      "p25l-2_6.png"
+    ],
+
+    "version": "Minecraft Bedrock 1.21.120+",
+    "download": "parkour-25-levels-2.mctemplate"
+  },
+  {
+    "title": "Supereasymaps hub 2 (v1.1)",
+    "desc": "Supereasymaps hub 2 is a new version of the original hub by Supereasymaps\nWith permission from Supereasymaps I have been operating at full capacity for 1 week\nMap have new features:Shop,Events,Change log and News\nNow enjoy it!\nWarning:This is template map so after import,click create and scroll down",
+    "category": "map",
+    "type": "parkours",
+    "image": "supereasymaps.jpg",
+
+    "gallery": [
+      "sem_1.png",
+      "sem_2.png",
+      "sem_3.png",
+      "sem_4.png",
+      "sem_5.png"
+    ],
+
+    "version": "Minecraft Bedrock 1.21.70+",
+    "download": "supereasymaps-hub-2-v1-1.mctemplate"
+  }
+]
