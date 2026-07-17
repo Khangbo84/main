@@ -4,7 +4,7 @@ const grid = document.getElementById("grid");
 const search = document.getElementById("search");
 const filter = document.getElementById("filter");
 const popup = document.getElementById("popup");
-
+const config ={ "imgPath":"../banner/maps/", "galleryPath":"../gallery/maps/"}
 let currentCategory = "all";
 
 /* ===== FETCH ===== */
@@ -24,7 +24,7 @@ function render(list){
     c.className = "card";
 
     c.innerHTML = `
-      <img src="${p.image}">
+      <img src="${config.imgPath+p.image">
       <div class="card-body">
         <span class="type">${p.type}</span>
         <h3>${p.title}</h3>
@@ -72,7 +72,7 @@ document.querySelectorAll(".category-filter button").forEach(btn => {
 function openPopup(data) {
   document.body.classList.add("no-scroll"); //  khóa nền
 
-  document.getElementById("popup-cover").src = data.image;
+  document.getElementById("popup-cover").src = config.imgPath + data.image;
   document.getElementById("popup-title").textContent = data.title;
   document.getElementById("popup-desc").textContent = data.desc || "";
   document.getElementById("popup-version").textContent = data.version || "";
@@ -84,7 +84,7 @@ function openPopup(data) {
   if (Array.isArray(data.gallery)) {
     data.gallery.forEach(src => {
       const img = document.createElement("img");
-      img.src = src;
+      img.src = config.imgPath + src;
       img.onclick = () => openImage(src);
       gallery.appendChild(img);
     });
