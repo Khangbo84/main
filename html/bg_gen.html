@@ -129,7 +129,7 @@
   </style>
 </head>
 <body>
-  <button id="langToggle" aria-label="Toggle language">??🇳VI</button>
+  <button id="langToggle" aria-label="Toggle language">VI</button>
 
   <div class="bg-animated" aria-hidden="true"></div>
   <div class="container">
@@ -555,7 +555,7 @@ function setLanguage(lang) {
 
     // update lang toggle button label
     const btn = document.getElementById('langToggle');
-    btn.textContent = (lang === 'en') ? '🇺🇸EN' : '🇻🇳VI'; // shows which language clicking will switch to
+    btn.textContent = (lang === 'en') ? 'EN' : 'VI'; // shows which language clicking will switch to
     btn.title = (lang === 'en') ? 'Chuyển sang tiếng Việt' : 'Switch to English';
   } catch (e) {
     console.error('setLanguage error', e);
