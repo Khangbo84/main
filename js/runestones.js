@@ -58,9 +58,35 @@ function formatType(type) {
   };
   return map[type] || (type && type.toUpperCase());
 }
+
+function isItemExpired(item) {
+  if (item.type !== 'limited_free' || !item.expiryDate) return false;
+  const now = new Date().getTime();
+  const expiry = new Date(item.expiryDate).getTime();
+  return now > expiry;
+}
+
+function redirectToOops(index, item) {
+  // Store item data in sessionStorage as fallback
+  const itemData = {
+    title: item.title,
+    desc: item.desc,
+    expiryDate: item.expiryDate
+  };
+  sessionStorage.setItem('oopsItemData', JSON.stringify(itemData));
+  
+  // Redirect to oops page with index parameter
+  window.location.href = `../html/oops.html?index=${index}`;
+}
     
 function openPopup(i){
   const b = builds[i];
+  
+  // Check if limited item is expired
+  if (isItemExpired(b)) {
+    redirectToOops(i, b);
+    return;
+  }
   
   // If bundle type with multiple items, render bundle viewer
   if (b.type === 'bundle' && Array.isArray(b.items)) {
@@ -79,7 +105,11 @@ function openPopup(i){
   
   if (popupImage) {
     // prefer gallery main image if available
-    popupImage.src = config.imgPath + (b.image || '');
+    if (Array.isArray(b.gallery) && b.gallery.length) {
+      popupImage.src = galleryBase + b.gallery[0];
+    } else {
+      popupImage.src = config.imgPath + (b.image || '');
+    }
     popupImage.alt = b.title || '';
   }
   
@@ -144,6 +174,9 @@ function renderBundleViewer(){
   // set main image
   const galleryBase = config.galleryPath || config.imgPath;
   if (popupImage) {
+    if (Array.isArray(item.gallery) && item.gallery.length) {
+      popupImage.src = galleryBase + item.gallery[0];
+    } else {
       popupImage.src = config.imgPath + (item.image || '');
     }
     popupImage.alt = item.title || '';
@@ -173,7 +206,7 @@ function renderBundleViewer(){
     bundleControls.appendChild(label);
     bundleControls.appendChild(next);
   }
-
+}
 
 const searchInput = document.getElementById("search");
 const typeFilter  = document.getElementById("typeFilter");
