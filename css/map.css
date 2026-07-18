@@ -212,7 +212,11 @@ body.no-scroll {
   font-weight: 600;
   margin-left: 6px;
   }
-.badge.parkour {
+.parkour {
   background: #abfff2;
   color: #003a33;
 }
+.map {
+  background: #4b8e61;
+  color: #003a33;
+  }
