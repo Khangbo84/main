@@ -8,7 +8,7 @@
     "items":[ 
              { 
                "title":"Simple House 1",
-               "image":"sh1_thumb.png",
+               "image":"sh1_thumb.jpg",
                "download":"download/runestones/Simple House Bundle.holoprint.mcpack",
                "desc":"Một ngôi nhà đơn giản cho sinh tồn hoặc trang trí",
                "gallery":[
@@ -20,7 +20,7 @@
                 }, 
               { 
                 "title":"Simple House 2", 
-                "image":"sh2_thumb.png",
+                "image":"sh2_thumb.jpg",
                 "download":"download/runestones/Simple House Bundle.holoprint.mcpack",
                 "desc":"Một ngôi nhà đơn giản cho sinh tồn hoặc trang trí",
                 "gallery":[
@@ -31,7 +31,7 @@
                  },
               {
                 "title":"Simple House 3", 
-                "image":"sh3_thumb.png",
+                "image":"sh3_thumb.jpg",
                 "download":"download/runestones/Simple House Bundle.holoprint.mcpack",
                 "desc":"Một ngôi nhà đơn giản cho sinh tồn hoặc trang trí",
                 "gallery":[
@@ -87,7 +87,7 @@
     "title": "Medieval House",
     "author": "Khangbo84",
     "desc": "Ngôi nhà nhỏ phong cách trung cổ\n Lưu ý:Đây là holoprint,bạn cần cài pack và đặt armor stand để sử dụng",
-    "image": "medieval1_thumb.png",
+    "image": "medieval1_thumb.jpg",
     "type": "official",
     "gallery": [
       "medieval1_1.jpg",
