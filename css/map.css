@@ -212,11 +212,15 @@ body.no-scroll {
   font-weight: 600;
   margin-left: 6px;
   }
-.parkour {
+.parkours {
   background: #abfff2;
-  color: #003a33;
+  color: #ffffff;
 }
-.map {
+.adventure {
   background: #4b8e61;
-  color: #003a33;
+  color: #ffffff;
   }
+.minigames {
+  background: #dc0000;
+  color: #000000;
+}
