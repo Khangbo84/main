@@ -173,7 +173,7 @@ function renderBundleViewer(){
     bundleControls.appendChild(label);
     bundleControls.appendChild(next);
   }
-}
+
 
 const searchInput = document.getElementById("search");
 const typeFilter  = document.getElementById("typeFilter");
