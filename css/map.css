@@ -77,11 +77,6 @@ body {
   padding: 10px;
 }
 
-.type {
-  font-size: 12px;
-  opacity: 0.7;
-}
-
 /* ===== POPUP ===== */
 .popup.hidden { display: none; }
 
@@ -204,14 +199,14 @@ body.no-scroll {
 #popup-desc {
   white-space: pre-line;
 }
-.badge {
+.type {
   display: inline-block;
   padding: 3px 9px;
-  font-size: 11px;
   border-radius: 999px;
   font-weight: 600;
   margin-left: 6px;
-  }
+  font-size: 12px;
+}
 .parkours {
   background: #abfff2;
   color: #ffffff;
