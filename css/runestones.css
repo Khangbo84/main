@@ -8,7 +8,9 @@ body{
   margin:0;
   font-family:system-ui,Segoe UI,Roboto;
   background: linear-gradient(160deg,#120b1f,#24153a,#1c2b4a);
-  color:var(--text)
+  color:var(--text);
+  display: flex;
+  flex-direction: column;
 }
 
 body.no-scroll {
