@@ -36,44 +36,56 @@ header input, header select{
   display:block;
 }
 
+/* Cấu trúc Card trên Desktop */
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .2s;
+  display: flex;
+  flex-direction: column; /* Chuyển text xuống dưới ảnh để ảnh đạt tỉ lệ 16:9 lớn */
+  gap: 0;
+  width: 100%;           /* Chiếm trọn 100% độ rộng của .grid (tức là 90% màn hình) */
+  text-decoration: none; /* Tránh lỗi đổi màu chữ nếu dùng thẻ <a> */
+  color: inherit;
+}
+
+.card:hover {
+  transform: translateY(-4px); /* Hiệu ứng nổi lên khi hover hợp với layout dọc hơn */
+}
+
+/* Thiết lập ảnh đạt tỉ lệ chuẩn 16:9 */
+.card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;  /* Ép ảnh luôn luôn hiển thị chuẩn tỉ lệ 16:9 theo chiều rộng */
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 16px 16px 0 0; /* Bo tròn góc trên của ảnh khớp với card */
+}
+
+/* Phần nội dung bên dưới ảnh */
+.card-body {
+  padding: 20px;         /* Tăng padding cho tương xứng với card lớn */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.card h3 {
+  margin: 6px 0 8px;     /* Cân chỉnh khoảng cách tiêu đề */
+  font-size: 20px;       /* Tăng font chữ tiêu đề cho dễ đọc trên card lớn */
+}
+
 /* Grid as vertical list (1 column) */
 .grid{
   display:flex;
   flex-direction:column;
   gap:18px;
   padding:20px;
-  max-width:90%;
+  width:90%;
+  max-width:1400px;
   margin:auto
-}
-
-.card{
-  background:var(--card);
-  border-radius:16px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:.2s;
-  display:flex;
-  gap:16px;
-}
-
-.card:hover{
-  transform:translateX(4px)
-}
-
-.card img{
-  width:300px;
-  height:140px;
-  object-fit:cover;
-  flex-shrink:0;
-  border-radius:12px;
-}
-
-.card-body{
-  padding:12px;
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
 }
 
 .badge{
@@ -111,11 +123,6 @@ header input, header select{
 .badge.official {
   background: #abfff2;
   color: #003a33;
-}
-
-.card h3 {
-  margin:0 0 4px;
-  font-size:16px;
 }
 
 .author {
