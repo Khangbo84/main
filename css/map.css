@@ -65,6 +65,10 @@ body {
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
+  text-decoration: none; /* Bỏ gạch chân mặc định của thẻ a */
+  color: inherit;        /* Giữ nguyên màu chữ cũ, không bị đổi thành màu xanh link */
+  display: block;        /* Đảm bảo thẻ a co giãn chuẩn như thẻ div cũ */
+  
 }
 
 .card img {
