@@ -73,11 +73,17 @@ function openPopup(i){
 
   // Single build / normal project
   currentBundle = null;
+  clearBundleControls(); // Clear bundle controls for non-bundle items
+  
   const galleryBase = config.galleryPath || config.imgPath;
   
   if (popupImage) {
     // prefer gallery main image if available
-    popupImage.src = config.imgPath + (b.image || '');
+    if (Array.isArray(b.gallery) && b.gallery.length) {
+      popupImage.src = galleryBase + b.gallery[0];
+    } else {
+      popupImage.src = config.imgPath + (b.image || '');
+    }
     popupImage.alt = b.title || '';
   }
   
@@ -97,8 +103,15 @@ function closePopup(e){
     document.body.classList.remove('no-scroll');
     // cleanup
     currentBundle = null;
+    clearBundleControls();
     if (popupGallery) popupGallery.innerHTML = '';
   } 
+}
+
+function clearBundleControls() {
+  if (bundleControls) {
+    bundleControls.innerHTML = '';
+  }
 }
 
 function renderGallery(images){
@@ -127,7 +140,7 @@ function renderBundleViewer(){
   const i = currentBundle.index;
   const item = items[i];
 
-  // If the popup markup has dedicated bundle controls area, populate it; otherwise, reuse existing popup fields
+  // Update content for current bundle item
   if (popupTitle) popupTitle.innerText = item.title || '';
   if (popupDesc) popupDesc.innerText = item.desc || '';
   if (popupDownload) popupDownload.href = item.download || '#';
@@ -146,7 +159,7 @@ function renderBundleViewer(){
   // render this item's gallery
   renderGallery(Array.isArray(item.gallery) ? item.gallery : []);
 
-  // render bundle navigation (prev/next and index)
+  // render bundle navigation (prev/next and index) - ONLY for bundles
   if (bundleControls) {
     bundleControls.innerHTML = '';
     const prev = document.createElement('button');
