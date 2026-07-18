@@ -44,7 +44,7 @@
     }
     .card img{
       width:100%;
-      height:100%;
+      height:260px;
       object-fit:cover
     }
     .card-body{
@@ -183,7 +183,7 @@ body.no-scroll {
 }
 @media(max-width:768px){
   .card img{
-    height:100%
+    height:130px
   }
   .popup img{
     max-height:240px
