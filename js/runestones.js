@@ -1,6 +1,6 @@
 window.onerror = function(msg, url, line, col, err){ console.error('window.onerror', {msg,url,line,col, stack: err && err.stack}); }; window.addEventListener('unhandledrejection', e=>console.error('unhandledrejection', e));
 let builds = [];
-const config={"imgPath":"../banner/runestones/"}
+const config={"imgPath":"../banner/runestones/","galleryPath":"../gallery/runestones/"}
 fetch('../configuration/builds.json')
   .then(res => res.json())
   .then(data => {
