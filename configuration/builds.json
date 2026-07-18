@@ -9,7 +9,7 @@
              { 
                "title":"Simple House 1",
                "image":"sh1_thumb.jpg",
-               "download":"../download/runestones/Simple House Bundle.holoprint.mcpack",
+               "download":"Simple House Bundle.holoprint.mcpack",
                "desc":"Một ngôi nhà đơn giản cho sinh tồn hoặc trang trí",
                "gallery":[
                  "sh1_1.jpg",
@@ -21,7 +21,7 @@
               { 
                 "title":"Simple House 2", 
                 "image":"sh2_thumb.jpg",
-                "download":"../download/runestones/Simple House Bundle.holoprint.mcpack",
+                "download":"Simple House Bundle.holoprint.mcpack",
                 "desc":"Một ngôi nhà đơn giản cho sinh tồn hoặc trang trí",
                 "gallery":[
                   "sh2_1.jpg",
@@ -32,7 +32,7 @@
               {
                 "title":"Simple House 3", 
                 "image":"sh3_thumb.jpg",
-                "download":"../download/runestones/Simple House Bundle.holoprint.mcpack",
+                "download":"Simple House Bundle.holoprint.mcpack",
                 "desc":"Một ngôi nhà đơn giản cho sinh tồn hoặc trang trí",
                 "gallery":[
                   "sh3_1.jpg",
@@ -56,7 +56,7 @@
       "christmas2.jpg",
       "christmas3.jpg"
     ],
-    "download": "../download/runestones/christmas_ship.holoprint.mcpack"
+    "download": "christmas_ship.holoprint.mcpack"
   },
   {
     "title": "Warped House",
@@ -68,7 +68,7 @@
       "warped1_1.jpg",
       "warped1_2.jpg"
     ],
-    "download": "../download/runestones/warped house.holoprint.mcpack"
+    "download": "warped house.holoprint.mcpack"
   },
   {
     "title": "Modern House",
@@ -81,7 +81,7 @@
       "modern1_2.jpg",
       "modern1_3.jpg"
     ],
-    "download": "../download/runestones/modern house.holoprint.mcpack"
+    "download": "modern house.holoprint.mcpack"
   },
   {
     "title": "Medieval House",
@@ -95,7 +95,7 @@
       "medieval1_3.jpg",
       "medieval1_4.jpg"
     ],
-    "download": "../download/runestones/medieval house.holoprint.mcpack"
+    "download": "medieval house.holoprint.mcpack"
   },
   {
     "title": "Copper House",
@@ -112,6 +112,6 @@
       "copper1_6.jpg",
       "copper1_7.jpg"
     ],
-    "download": "../download/runestones/modern house.holoprint.mcpack"
+    "download": "modern house.holoprint.mcpack"
   }
 ]
