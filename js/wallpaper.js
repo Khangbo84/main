@@ -16,8 +16,13 @@ fetch("../configuration/wallpapers.json")
 function render(list){
   grid.innerHTML="";
   list.forEach(p=>{
-    const c=document.createElement("div");
+    // Tạo thẻ <a> thay vì <div> để biến cả card thành một đường link bấm được
+    const c=document.createElement("a");
+    c.href = p.download;          // Gán link download từ JSON vào đây
+    c.target = "_blank";         // Mở link trong tab mới để không bị mất trang hiện tại
+    c.rel = "noopener noreferrer"; // Bảo mật khi mở tab mới
     c.className="card";
+    
     c.innerHTML=`
       <img src="${config.imgPath+p.image}" alt="${p.title}">
       <div class="card-body">
