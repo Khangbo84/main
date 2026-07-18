@@ -77,11 +77,7 @@ function openPopup(i){
   
   if (popupImage) {
     // prefer gallery main image if available
-    if (Array.isArray(b.gallery) && b.gallery.length) {
-      popupImage.src = galleryBase + b.gallery[0];
-    } else {
-      popupImage.src = config.imgPath + (b.image || '');
-    }
+    popupImage.src = config.imgPath + (b.image || '');
     popupImage.alt = b.title || '';
   }
   
