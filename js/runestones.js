@@ -1,12 +1,15 @@
 window.onerror = function(msg, url, line, col, err){ console.error('window.onerror', {msg,url,line,col, stack: err && err.stack}); }; window.addEventListener('unhandledrejection', e=>console.error(e.reason));
+
 let builds = [];
 const config={"imgPath":"../banner/runestones/","galleryPath":"../gallery/runestones/"}
+
 fetch('../configuration/builds.json')
   .then(res => res.json())
   .then(data => {
     builds = data;
     render(builds);
-  });
+  })
+  .catch(err => console.error('Failed to load builds.json:', err));
 
 // Popup DOM refs (look for elements by id; if not present, code will still work but gallery won't render)
 const overlay = document.getElementById('overlay');
@@ -23,6 +26,8 @@ let currentBundle = null; // {items: [...], index: 0}
 
 function render(list){
   const grid = document.getElementById('grid');
+  if (!grid) return;
+  
   grid.innerHTML = '';
   list.forEach((b,i)=>{
     const card = document.createElement('div');
@@ -34,11 +39,9 @@ function render(list){
     <span class="badge ${b.type}">
       ${formatType(b.type)}
     </span>
-    <h3>
-  ${b.title}
-<p class="author">by ${b.author}</p>
-<p class="desc">${b.desc || ''}</p>
-</h3>
+    <h3>${b.title}</h3>
+    <p class="author">by ${b.author}</p>
+    <p class="desc">${b.desc || ''}</p>
   </div>
 `;
     grid.appendChild(card);
@@ -58,6 +61,7 @@ function formatType(type) {
     
 function openPopup(i){
   const b = builds[i];
+  
   // If bundle type with multiple items, render bundle viewer
   if (b.type === 'bundle' && Array.isArray(b.items)) {
     currentBundle = { items: b.items, index: 0 };
@@ -70,11 +74,17 @@ function openPopup(i){
   // Single build / normal project
   currentBundle = null;
   const galleryBase = config.galleryPath || config.imgPath;
+  
   if (popupImage) {
     // prefer gallery main image if available
-    popupImage.src = config.imgPath + (b.image || '');
+    if (Array.isArray(b.gallery) && b.gallery.length) {
+      popupImage.src = galleryBase + b.gallery[0];
+    } else {
+      popupImage.src = config.imgPath + (b.image || '');
+    }
     popupImage.alt = b.title || '';
   }
+  
   if (popupTitle) popupTitle.innerText = b.title || '';
   if (popupDesc) popupDesc.innerText = b.desc || '';
   if (popupDownload) popupDownload.href = b.download || '#';
@@ -85,13 +95,15 @@ function openPopup(i){
   document.body.classList.add('no-scroll');
 }
 
-function closePopup(e){ if(!e||e.target.id==='overlay'){
-  overlay && overlay.classList.remove('active');
-  document.body.classList.remove('no-scroll');
-  // cleanup
-  currentBundle = null;
-  if (popupGallery) popupGallery.innerHTML = '';
-} }
+function closePopup(e){ 
+  if(!e || e.target.id==='overlay'){
+    overlay && overlay.classList.remove('active');
+    document.body.classList.remove('no-scroll');
+    // cleanup
+    currentBundle = null;
+    if (popupGallery) popupGallery.innerHTML = '';
+  } 
+}
 
 function renderGallery(images){
   if (!popupGallery) return;
@@ -158,9 +170,6 @@ function renderBundleViewer(){
     bundleControls.appendChild(prev);
     bundleControls.appendChild(label);
     bundleControls.appendChild(next);
-  } else {
-    // if there's no bundleControls element, optionally create simple in-popup nav buttons above/below popupImage
-    // as a fallback, do nothing.
   }
 }
 
