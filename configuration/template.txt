@@ -25,14 +25,41 @@
 //category:{ map, addon, pack}
 
 **Runestones**
-{
-    "title": "Con tàu Giáng sinh",
-    "author": "Khangbo84",
-    "desc": "Con tàu Giáng sinh Medieval dành cho dịp lễ,trang trí.Với cấu trúc độc đáo và tông màu tươi sáng giữa màn đêm đông.Đừng bỏ lỡ công trình limited này!\n Lưu ý:Đây là holoprint,bạn cần cài pack và đặt armor stand để sử dụng",
-    "image": "christmas_ship.jpg",
-    "type": "limited_free",
-    "download": "https://github.com/Khangbo84/runestonebuild/raw/refs/heads/main/christmas_ship.holoprint.mcpack"
-  },
+Single item: 
+{ 
+"title":"Project A", "type":"unlimited_free", "image":"thumb-a.png", "download":"link-a.zip",
+"desc":"Mô tả ngắn...",
+"gallery":[
+"a1.png",
+"a2.png",
+"a3.png"
+] 
+}
+Bundle (items là mảng các công trình con): 
+{ 
+"title":"Bundle X",
+"type":"bundle",
+"image":"bundle-thumb.png",
+"items":[ 
+{ 
+"title":"Part 1",
+"image":"part1-thumb.png",
+"download":"part1.zip",
+"desc":"Mô tả part1",
+"gallery":[
+"p1-1.png",
+"p1-2.png"] 
+}, 
+{ 
+"title":"Part 2", 
+"image":"part2-thumb.png", "download":"part2.zip",
+"desc":"Mô tả part2",
+"gallery":[
+"p2-1.png"
+] 
+} 
+] 
+}
 
 //type:{ official, limited_free, unlimited_free, bundle, gold_ad}
 
