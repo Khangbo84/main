@@ -93,6 +93,9 @@ header p{color:var(--muted);font-size:14px;margin-top:6px}
   border-radius:var(--radius);
   overflow:hidden;
   box-shadow:0 10px 30px rgba(0,0,0,.35);
+  text-decoration: none; /* Bỏ gạch chân mặc định của thẻ a */
+  color: inherit;        /* Giữ nguyên màu chữ cũ, không bị đổi thành màu xanh link */
+  display: block;        /* Đảm bảo thẻ a co giãn chuẩn như thẻ div cũ */
 }
 
 /* Shine layer */
