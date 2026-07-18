@@ -72,9 +72,8 @@
     "title": "Modern House",
     "author": "Khangbo84",
     "desc": "Ngôi nhà hiện đại nhỏ nhưng đẹp,với cấu trúc chắc chắn\n Lưu ý:Đây là holoprint,bạn cần cài pack và đặt armor stand để sử dụng",
-    "image": "christmas_ship.png",
-    "type": "limited_free",
-    "expiryDate": "2026-12-31T23:59:59Z",
+    "image": "modern1_thumb.png",
+    "type": "official",
     "gallery": [
       "modern1_1.jpg",
       "modern1_2.jpg",
