@@ -63,6 +63,7 @@ function openPopup(i){
     currentBundle = { items: b.items, index: 0 };
     renderBundleViewer();
     overlay && overlay.classList.add('active');
+    document.body.classList.add('no-scroll');
     return;
   }
 
@@ -71,8 +72,13 @@ function openPopup(i){
   const galleryBase = config.galleryPath || config.imgPath;
   if (popupImage) {
     // prefer gallery main image if available
-  popupImage.src = config.imgPath + (b.image || '');
-  popupImage.alt = b.title || '';
+    if (Array.isArray(b.gallery) && b.gallery.length) {
+      popupImage.src = galleryBase + b.gallery[0];
+    } else {
+      popupImage.src = config.imgPath + (b.image || '');
+    }
+    popupImage.alt = b.title || '';
+  }
   if (popupTitle) popupTitle.innerText = b.title || '';
   if (popupDesc) popupDesc.innerText = b.desc || '';
   if (popupDownload) popupDownload.href = b.download || '#';
@@ -80,10 +86,12 @@ function openPopup(i){
   renderGallery(Array.isArray(b.gallery) ? b.gallery : []);
 
   overlay && overlay.classList.add('active');
+  document.body.classList.add('no-scroll');
 }
 
 function closePopup(e){ if(!e||e.target.id==='overlay'){
   overlay && overlay.classList.remove('active');
+  document.body.classList.remove('no-scroll');
   // cleanup
   currentBundle = null;
   if (popupGallery) popupGallery.innerHTML = '';
