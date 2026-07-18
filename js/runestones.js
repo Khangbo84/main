@@ -16,7 +16,7 @@ const overlay = document.getElementById('overlay');
 const popup = document.getElementById('popup');
 const popupTitle = document.getElementById('popupTitle');
 const popupDesc = document.getElementById('popupDesc');
-const popupDownload = document.getElementById("popupDownload").href = config.downloadPath + data.download || "#";
+const popupDownload = document.getElementById("popupDownload");
 const popupImage = document.getElementById('popupImage');
 const popupGallery = document.getElementById('popupGallery');
 const bundleControls = document.getElementById('bundleControls');
@@ -105,17 +105,13 @@ function openPopup(i){
   
   if (popupImage) {
     // prefer gallery main image if available
-    if (Array.isArray(b.gallery) && b.gallery.length) {
-      popupImage.src = galleryBase + b.gallery[0];
-    } else {
-      popupImage.src = config.imgPath + (b.image || '');
-    }
+    popupImage.src = config.imgPath + (b.image || '');
     popupImage.alt = b.title || '';
   }
   
   if (popupTitle) popupTitle.innerText = b.title || '';
   if (popupDesc) popupDesc.innerText = b.desc || '';
-  if (popupDownload) popupDownload.href = b.download || '#';
+  if (popupDownload) popupDownload.href = config.downloadPath + b.download || '#';
 
   renderGallery(Array.isArray(b.gallery) ? b.gallery : []);
 
@@ -169,14 +165,11 @@ function renderBundleViewer(){
   // Update content for current bundle item
   if (popupTitle) popupTitle.innerText = item.title || '';
   if (popupDesc) popupDesc.innerText = item.desc || '';
-  if (popupDownload) popupDownload.href = item.download || '#';
+  if (popupDownload) popupDownload.href = config.downloadPath + item.download || '#';
 
   // set main image
   const galleryBase = config.galleryPath || config.imgPath;
   if (popupImage) {
-    if (Array.isArray(item.gallery) && item.gallery.length) {
-      popupImage.src = galleryBase + item.gallery[0];
-    } else {
       popupImage.src = config.imgPath + (item.image || '');
     }
     popupImage.alt = item.title || '';
