@@ -1,7 +1,7 @@
 window.onerror = function(msg, url, line, col, err){ console.error('window.onerror', {msg,url,line,col, stack: err && err.stack}); }; window.addEventListener('unhandledrejection', e=>console.error(e.reason));
 
 let builds = [];
-const config={"imgPath":"../banner/runestones/","galleryPath":"../gallery/runestones/"}
+const config={"imgPath":"../banner/runestones/","galleryPath":"../gallery/runestones/","downloadPath":"../download/runestones/"}
 
 fetch('../configuration/builds.json')
   .then(res => res.json())
@@ -16,7 +16,7 @@ const overlay = document.getElementById('overlay');
 const popup = document.getElementById('popup');
 const popupTitle = document.getElementById('popupTitle');
 const popupDesc = document.getElementById('popupDesc');
-const popupDownload = document.getElementById('popupDownload');
+const popupDownload = document.getElementById("popupDownload").href = config.downloadPath + data.download || "#";
 const popupImage = document.getElementById('popupImage');
 const popupGallery = document.getElementById('popupGallery');
 const bundleControls = document.getElementById('bundleControls');
