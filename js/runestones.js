@@ -1,4 +1,4 @@
-window.onerror = function(msg, url, line, col, err){ console.error('window.onerror', {msg,url,line,col, stack: err && err.stack}); }; window.addEventListener('unhandledrejection', e=>console.error([...]))
+window.onerror = function(msg, url, line, col, err){ console.error('window.onerror', {msg,url,line,col, stack: err && err.stack}); }; window.addEventListener('unhandledrejection', e=>console.error(e.reason));
 let builds = [];
 const config={"imgPath":"../banner/runestones/","galleryPath":"../gallery/runestones/"}
 fetch('../configuration/builds.json')
