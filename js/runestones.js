@@ -72,11 +72,7 @@ function openPopup(i){
   const galleryBase = config.galleryPath || config.imgPath;
   if (popupImage) {
     // prefer gallery main image if available
-    if (Array.isArray(b.gallery) && b.gallery.length) {
-      popupImage.src = galleryBase + b.gallery[0];
-    } else {
-      popupImage.src = config.imgPath + (b.image || '');
-    }
+    popupImage.src = config.imgPath + (b.image || '');
     popupImage.alt = b.title || '';
   }
   if (popupTitle) popupTitle.innerText = b.title || '';
