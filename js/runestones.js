@@ -173,7 +173,7 @@ function renderBundleViewer(){
       popupImage.src = config.imgPath + (item.image || '');
     }
     popupImage.alt = item.title || '';
-  }
+  
 
   // render this item's gallery
   renderGallery(Array.isArray(item.gallery) ? item.gallery : []);
