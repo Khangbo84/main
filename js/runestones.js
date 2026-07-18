@@ -1,4 +1,4 @@
-    window.onerror = function(msg, url, line, col, err){ console.error('window.onerror', {msg,url,line,col, stack: err && err.stack}); }; window.addEventListener('unhandledrejection', e=>console.error('unhandledrejection', e.reason && e.reason.stack ? e.reason.stack : e.reason));
+window.onerror = function(msg, url, line, col, err){ console.error('window.onerror', {msg,url,line,col, stack: err && err.stack}); }; window.addEventListener('unhandledrejection', e=>console.error('unhandledrejection', e));
 let builds = [];
 const config={"imgPath":"../banner/runestones/"}
 fetch('../configuration/builds.json')
@@ -7,6 +7,19 @@ fetch('../configuration/builds.json')
     builds = data;
     render(builds);
   });
+
+// Popup DOM refs (look for elements by id; if not present, code will still work but gallery won't render)
+const overlay = document.getElementById('overlay');
+const popup = document.getElementById('popup');
+const popupTitle = document.getElementById('popupTitle');
+const popupDesc = document.getElementById('popupDesc');
+const popupDownload = document.getElementById('popupDownload');
+const popupImage = document.getElementById('popupImage');
+const popupGallery = document.getElementById('popupGallery');
+const bundleControls = document.getElementById('bundleControls');
+
+// state for bundle viewer
+let currentBundle = null; // {items: [...], index: 0}
 
 function render(list){
   const grid = document.getElementById('grid');
@@ -24,7 +37,7 @@ function render(list){
     <h3>
   ${b.title}
 <p class="author">by ${b.author}</p>
-<p class="desc">${b.desc}</p>
+<p class="desc">${b.desc || ''}</p>
 </h3>
   </div>
 `;
@@ -40,31 +53,126 @@ function formatType(type) {
     gold_ad: "GOLD VERSION",
     official: "OFFICIAL"
   };
-  return map[type] || type.toUpperCase();
-    }
+  return map[type] || (type && type.toUpperCase());
+}
     
 function openPopup(i){
   const b = builds[i];
-  popupImage.src=config.imgPath + b.image; popupImage.alt=b.title;
-  popupTitle.innerText=b.title;
-  popupDesc.innerText=b.desc;
-  popupDownload.href=b.download;
-  overlay.classList.add('active');
+  // If bundle type with multiple items, render bundle viewer
+  if (b.type === 'bundle' && Array.isArray(b.items)) {
+    currentBundle = { items: b.items, index: 0 };
+    renderBundleViewer();
+    overlay && overlay.classList.add('active');
+    return;
+  }
+
+  // Single build / normal project
+  currentBundle = null;
+  if (popupImage) {
+    // prefer gallery main image if available
+    if (Array.isArray(b.gallery) && b.gallery.length) {
+      popupImage.src = config.imgPath + b.gallery[0];
+    } else {
+      popupImage.src = config.imgPath + (b.image || '');
+    }
+    popupImage.alt = b.title || '';
+  }
+  if (popupTitle) popupTitle.innerText = b.title || '';
+  if (popupDesc) popupDesc.innerText = b.desc || '';
+  if (popupDownload) popupDownload.href = b.download || '#';
+
+  renderGallery(Array.isArray(b.gallery) ? b.gallery : []);
+
+  overlay && overlay.classList.add('active');
 }
-function closePopup(e){ if(!e||e.target.id==='overlay')overlay.classList.remove('active'); }
+
+function closePopup(e){ if(!e||e.target.id==='overlay'){
+  overlay && overlay.classList.remove('active');
+  // cleanup
+  currentBundle = null;
+  if (popupGallery) popupGallery.innerHTML = '';
+} }
+
+function renderGallery(images){
+  if (!popupGallery) return;
+  popupGallery.innerHTML = '';
+  if (!Array.isArray(images) || !images.length) return;
+
+  // main image is popupImage (already set by caller)
+  images.forEach((img, idx) => {
+    const thumb = document.createElement('img');
+    thumb.className = 'thumb';
+    thumb.src = config.imgPath + img;
+    thumb.alt = '';
+    thumb.onclick = () => {
+      if (popupImage) popupImage.src = config.imgPath + img;
+    };
+    popupGallery.appendChild(thumb);
+  });
+}
+
+function renderBundleViewer(){
+  if (!currentBundle) return;
+  const items = currentBundle.items;
+  const i = currentBundle.index;
+  const item = items[i];
+
+  // If the popup markup has dedicated bundle controls area, populate it; otherwise, reuse existing popup fields
+  if (popupTitle) popupTitle.innerText = item.title || '';
+  if (popupDesc) popupDesc.innerText = item.desc || '';
+  if (popupDownload) popupDownload.href = item.download || '#';
+
+  // set main image
+  if (popupImage) {
+    if (Array.isArray(item.gallery) && item.gallery.length) {
+      popupImage.src = config.imgPath + item.gallery[0];
+    } else {
+      popupImage.src = config.imgPath + (item.image || '');
+    }
+    popupImage.alt = item.title || '';
+  }
+
+  // render this item's gallery
+  renderGallery(Array.isArray(item.gallery) ? item.gallery : []);
+
+  // render bundle navigation (prev/next and index)
+  if (bundleControls) {
+    bundleControls.innerHTML = '';
+    const prev = document.createElement('button');
+    prev.innerText = '<';
+    prev.disabled = i === 0;
+    prev.onclick = () => { currentBundle.index = Math.max(0, currentBundle.index - 1); renderBundleViewer(); };
+
+    const next = document.createElement('button');
+    next.innerText = '>';
+    next.disabled = i === items.length - 1;
+    next.onclick = () => { currentBundle.index = Math.min(items.length - 1, currentBundle.index + 1); renderBundleViewer(); };
+
+    const label = document.createElement('span');
+    label.className = 'bundle-index';
+    label.innerText = `${i+1} / ${items.length}`;
+
+    bundleControls.appendChild(prev);
+    bundleControls.appendChild(label);
+    bundleControls.appendChild(next);
+  } else {
+    // if there's no bundleControls element, optionally create simple in-popup nav buttons above/below popupImage
+    // as a fallback, do nothing.
+  }
+}
 
 const searchInput = document.getElementById("search");
 const typeFilter  = document.getElementById("typeFilter");
 const badgeFilter = document.getElementById("badgeFilter");
 
 function applyFilter() {
-  const q = searchInput.value.toLowerCase();
+  const q = searchInput ? searchInput.value.toLowerCase() : '';
   const typeValue  = typeFilter ? typeFilter.value : "all";
   const badgeValue = badgeFilter ? badgeFilter.value : "all";
 
   const filtered = builds.filter(b => {
     const textMatch =
-      b.title.toLowerCase().includes(q) ||
+      (b.title && b.title.toLowerCase().includes(q)) ||
       (b.desc && b.desc.toLowerCase().includes(q)) ||
       (b.author && b.author.toLowerCase().includes(q)) ||
       (b.theme && b.theme.toLowerCase().includes(q));
@@ -82,7 +190,7 @@ function applyFilter() {
 }
 
 /* Events */
-searchInput.addEventListener("input", applyFilter);
+if (searchInput) searchInput.addEventListener("input", applyFilter);
 
 if (typeFilter) {
   typeFilter.addEventListener("change", applyFilter);
@@ -91,3 +199,6 @@ if (typeFilter) {
 if (badgeFilter) {
   badgeFilter.addEventListener("change", applyFilter);
 }
+
+// close popup when clicking overlay
+if (overlay) overlay.addEventListener('click', closePopup);
