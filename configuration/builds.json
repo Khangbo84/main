@@ -45,9 +45,10 @@
   {
     "title": "Christmas Ship",
     "author": "Khangbo84",
-    "desc": "Con tàu Giáng sinh Medieval dành cho dịp lễ,trang trí.Với cấu trúc độc đáo và tông màu tươi sáng giữa màn đêm đông.Đừng bỏ lỡ công trình limited này!\n Lưu ý:Đây là holoprint,bạn cần cài pack và đặt armor stand để sử dụng",
+    "desc": "Con tàu Giáng sinh Medieval dành cho dịp lễ,trang trí.Với cấu trúc độc đáo và tông màu tươi sáng giữa màn đêm đông.Đừng bỏ lỡ công trình limited này!",
     "image": "christmas_ship.png",
     "type": "limited_free",
+    "expiryDate": "2026-12-31T23:59:59Z",
     "gallery": [
       "christmas1.jpg",
       "christmas2.jpg",
@@ -73,6 +74,7 @@
     "desc": "Ngôi nhà hiện đại nhỏ nhưng đẹp,với cấu trúc chắc chắn\n Lưu ý:Đây là holoprint,bạn cần cài pack và đặt armor stand để sử dụng",
     "image": "christmas_ship.png",
     "type": "limited_free",
+    "expiryDate": "2026-12-31T23:59:59Z",
     "gallery": [
       "modern1_1.jpg",
       "modern1_2.jpg",
@@ -81,4 +83,3 @@
     "download": ""
   }
 ]
-
