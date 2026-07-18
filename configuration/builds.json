@@ -1,6 +1,49 @@
 [
   {
-    "title": "Con tàu Giáng sinh",
+    "title": "Simple House Bundle",
+    "author": "Khangbo84",
+    "desc": "Toàn bộ ngôi nhà đơn giản\n Lưu ý:Đây là holoprint,bạn cần cài pack và đặt armor stand để sử dụng",
+    "image": "simple_house_bundle.jpg",
+    "type": "bundle",
+    "items":[ 
+             { 
+               "title":"Simple House 1",
+               "image":"sh1_thumb.png",
+               "download":"",
+               "desc":"Một ngôi nhà đơn giản cho sinh tồn hoặc trang trí",
+               "gallery":[
+                 "sh1_1.jpg",
+                 "sh1_2.jpg",
+                 "sh1_3.jpg",
+                 "sh1_4.jpg"
+                  ] 
+                }, 
+              { 
+                "title":"Simple House 2", 
+                "image":"sh2_thumb.png",
+                "download":"",
+                "desc":"Một ngôi nhà đơn giản cho sinh tồn hoặc trang trí",
+                "gallery":[
+                  "sh2_1.jpg",
+                  "sh2_2.jpg",
+                  "sh2_3.jpg"
+                   ]
+                 },
+              {
+                "title":"Simple House 3", 
+                "image":"sh3_thumb.png",
+                "download":"",
+                "desc":"Một ngôi nhà đơn giản cho sinh tồn hoặc trang trí",
+                "gallery":[
+                  "sh3_1.jpg",
+                  "sh3_2.jpg",
+                  "sh3_3.jpg"
+                   ]
+                }
+    ] 
+  },
+  {
+    "title": "Christmas Ship",
     "author": "Khangbo84",
     "desc": "Con tàu Giáng sinh Medieval dành cho dịp lễ,trang trí.Với cấu trúc độc đáo và tông màu tươi sáng giữa màn đêm đông.Đừng bỏ lỡ công trình limited này!\n Lưu ý:Đây là holoprint,bạn cần cài pack và đặt armor stand để sử dụng",
     "image": "christmas_ship.png",
@@ -13,11 +56,29 @@
     "download": "https://github.com/Khangbo84/runestonebuild/raw/refs/heads/main/christmas_ship.holoprint.mcpack"
   },
   {
-    "title": "Simple House Bundle",
+    "title": "Warped House",
     "author": "Khangbo84",
-    "desc": "Toàn bộ công trình chủ đề",
-    "image": "simple_house_bundle.jpg",
+    "desc": "Căn nhà với màu xanh của gỗ địa ngục và màu trắng tinh khiết từ thạch anh toát lên cho mình vẻ sang trọng\n Lưu ý:Đây là holoprint,bạn cần cài pack và đặt armor stand để sử dụng",
+    "image": "warped1_thumb.png",
     "type": "official",
-    "download": "https://your-shortlink"
+    "gallery": [
+      "warped1_1.jpg",
+      "warped1_2.jpg"
+    ],
+    "download": ""
+  },
+  {
+    "title": "Modern House",
+    "author": "Khangbo84",
+    "desc": "Ngôi nhà hiện đại nhỏ nhưng đẹp,với cấu trúc chắc chắn\n Lưu ý:Đây là holoprint,bạn cần cài pack và đặt armor stand để sử dụng",
+    "image": "christmas_ship.png",
+    "type": "limited_free",
+    "gallery": [
+      "modern1_1.jpg",
+      "modern1_2.jpg",
+      "modern1_3.jpg"
+    ],
+    "download": ""
   }
 ]
+
