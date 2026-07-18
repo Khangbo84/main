@@ -1,4 +1,4 @@
-window.onerror = function(msg, url, line, col, err){ console.error('window.onerror', {msg,url,line,col, stack: err && err.stack}); }; window.addEventListener('unhandledrejection', e=>console.error('unhandledrejection', e));
+window.onerror = function(msg, url, line, col, err){ console.error('window.onerror', {msg,url,line,col, stack: err && err.stack}); }; window.addEventListener('unhandledrejection', e=>console.error([...]
 let builds = [];
 const config={"imgPath":"../banner/runestones/","galleryPath":"../gallery/runestones/"}
 fetch('../configuration/builds.json')
@@ -68,10 +68,11 @@ function openPopup(i){
 
   // Single build / normal project
   currentBundle = null;
+  const galleryBase = config.galleryPath || config.imgPath;
   if (popupImage) {
     // prefer gallery main image if available
     if (Array.isArray(b.gallery) && b.gallery.length) {
-      popupImage.src = config.imgPath + b.gallery[0];
+      popupImage.src = galleryBase + b.gallery[0];
     } else {
       popupImage.src = config.imgPath + (b.image || '');
     }
@@ -98,14 +99,16 @@ function renderGallery(images){
   popupGallery.innerHTML = '';
   if (!Array.isArray(images) || !images.length) return;
 
+  const galleryBase = config.galleryPath || config.imgPath;
+
   // main image is popupImage (already set by caller)
   images.forEach((img, idx) => {
     const thumb = document.createElement('img');
     thumb.className = 'thumb';
-    thumb.src = config.imgPath + img;
+    thumb.src = galleryBase + img;
     thumb.alt = '';
     thumb.onclick = () => {
-      if (popupImage) popupImage.src = config.imgPath + img;
+      if (popupImage) popupImage.src = galleryBase + img;
     };
     popupGallery.appendChild(thumb);
   });
@@ -123,9 +126,10 @@ function renderBundleViewer(){
   if (popupDownload) popupDownload.href = item.download || '#';
 
   // set main image
+  const galleryBase = config.galleryPath || config.imgPath;
   if (popupImage) {
     if (Array.isArray(item.gallery) && item.gallery.length) {
-      popupImage.src = config.imgPath + item.gallery[0];
+      popupImage.src = galleryBase + item.gallery[0];
     } else {
       popupImage.src = config.imgPath + (item.image || '');
     }
