@@ -27,7 +27,10 @@
 **Runestones**
 Single item: 
 { 
-"title":"Project A", "type":"unlimited_free", "image":"thumb-a.png", "download":"link-a.zip",
+"title":"Project A",
+"type":"unlimited_free",
+"image":"thumb-a.png",
+"download":"link-a.zip",
 "desc":"Mô tả ngắn...",
 "gallery":[
 "a1.png",
