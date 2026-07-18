@@ -19,6 +19,11 @@
     "download": "parkour-25-levels-2-3.mctemplate"
   },
 
+//type map:{ parkours, adventure, minigames}
+//type addon:{ tools, survival, furniture}
+//type pack:{ pvp, changes, vibrant visual}
+//category:{ map, addon, pack}
+
 **Runestones**
 {
     "title": "Con tàu Giáng sinh",
@@ -29,4 +34,13 @@
     "download": "https://github.com/Khangbo84/runestonebuild/raw/refs/heads/main/christmas_ship.holoprint.mcpack"
   },
 
+//type:{ official, limited_free, unlimited_free, bundle, gold_ad}
+
 **Wallpaper**
+{
+    "title": "Noi kamazawa Live wallpaper Background",
+    "type": "anime",
+    "image": "noi_kamazawa.png",
+    "desc": "Noi kamazawa Live wallpaper Chou Kaguya Hime",
+    "download": "https://www.mediafire.com/file/s0ycpm27q7euukv/Noi+kamazawa+live+wallpaper.mcpack/file"
+  },
