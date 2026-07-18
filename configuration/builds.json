@@ -37,7 +37,9 @@
                 "gallery":[
                   "sh3_1.jpg",
                   "sh3_2.jpg",
-                  "sh3_3.jpg"
+                  "sh3_3.jpg",
+                  "sh3_4.jpg",
+                  "sh3_5.jpg"
                    ]
                 }
     ] 
@@ -78,6 +80,37 @@
       "modern1_1.jpg",
       "modern1_2.jpg",
       "modern1_3.jpg"
+    ],
+    "download": "download/runestones/modern house.holoprint.mcpack"
+  },
+  {
+    "title": "Medieval House",
+    "author": "Khangbo84",
+    "desc": "Ngôi nhà nhỏ phong cách trung cổ\n Lưu ý:Đây là holoprint,bạn cần cài pack và đặt armor stand để sử dụng",
+    "image": "medieval1_thumb.png",
+    "type": "official",
+    "gallery": [
+      "medieval1_1.jpg",
+      "medieval1_2.jpg",
+      "medieval1_3.jpg",
+      "medieval1_4.jpg"
+    ],
+    "download": "download/runestones/medieval house.holoprint.mcpack"
+  },
+  {
+    "title": "Copper House",
+    "author": "Khangbo84",
+    "desc": "Nơi để bạn tận dụng tối đa những khối đồng của bạn,xây nên căn nhà đẹp mắt\n Lưu ý:Đây là holoprint,bạn cần cài pack và đặt armor stand để sử dụng",
+    "image": "copper1_thumb.png",
+    "type": "official",
+    "gallery": [
+      "copper1_1.jpg",
+      "copper1_2.jpg",
+      "copper1_3.jpg",
+      "copper1_4.jpg",
+      "copper1_5.jpg",
+      "copper1_6.jpg",
+      "copper1_7.jpg"
     ],
     "download": "download/runestones/modern house.holoprint.mcpack"
   }
