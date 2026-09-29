@@ -19,24 +19,31 @@
     "download": "parkour-25-levels-2-3.mctemplate"
   },
   {
-    "title": "Dimensions Spiral",
+    "title": "Dimensions Spiral V2 (UPDATE)",
     "desc": "DIMENSION SPIRAL have 3 spiral with different biome and theme.Also map have many features like:lava rising,snake parkour and lava boots.Download now!\nWarning:\nThis map is a template map so after importing the map please click CREATE\nMin Version Map:1.20.80",
     "category": "map",
     "type": "parkours",
-    "image": "dimensions_spiral.jpg",
+    "image": "dimensions_spiralv2.jpg",
 
     "gallery": [
-      "ds_img1.png",
+      "ds-v2-1.jpg",
       "ds_img2.png",
       "ds_img3.png",
+      "ds-v2-2.jpg",
       "ds_img4.png",
       "ds_img5.png",
       "ds_img6.png",
-      "ds_img7.png"
+      "ds-v2-3.jpg",
+      "ds-v2-7.jpg",
+      "ds-v2-4.jpg",
+      "ds-v2-5.jpg",
+      "ds-v2-6.jpg",
+      "ds-v2-8.jpg",
+      "ds-v2-9.jpg",
     ],
 
-    "version": "Minecraft Bedrock 1.21.80+",
-    "download": "dimension-spiral-v1-1.mctemplate"
+    "version": "Minecraft Bedrock 1.21.130+",
+    "download": "dimensions-spiral-v2.mctemplate"
   },
   {
     "title": "1st Anniversary Parkour",
