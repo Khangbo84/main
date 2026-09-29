@@ -14,7 +14,7 @@
       "p25l_img5.png",
       "p25l_img6.png"
     ],
-
+    "changelog":"Init release",
     "version": "Minecraft Bedrock 1.21.30",
     "download": "parkour-25-levels-2-3.mctemplate"
   },
@@ -41,7 +41,7 @@
       "ds-v2-8.jpg",
       "ds-v2-9.jpg",
     ],
-
+    "changlog":"Dimensions Spiral v2 update,with new system:Time,Easter egg,Finish,Snake...\nEaster eggs has increased to 10, can you find them?\nRedecorate and change all 3 dimensions.",
     "version": "Minecraft Bedrock 1.21.130+",
     "download": "dimensions-spiral-v2.mctemplate"
   },
@@ -60,7 +60,7 @@
       "1st_5.png",
       "1st_6.png"
     ],
-
+    "changelog":"Init release",
     "version": "Minecraft Bedrock 1.21.120+",
     "download": "1st-anniversary-parkour.mctemplate"
   },
@@ -75,7 +75,7 @@
       "tsi_1.png",
       "tsi_2.png"
     ],
-
+    "changelog":"Init release",
     "version": "Minecraft Bedrock 1.21.70+",
     "download": "the-summer-island.mctemplate"
   },
@@ -93,7 +93,7 @@
       "autumn_4.png",
       "autumn_6.png"
     ],
-
+    "changelog":"Init release",
     "version": "Minecraft Bedrock 1.21.120+",
     "download": "the-autumn-island.mctemplate"
   },
@@ -112,13 +112,13 @@
       "p25l-2_5.png",
       "p25l-2_6.png"
     ],
-
+    "changelog":"Init release",
     "version": "Minecraft Bedrock 1.21.120+",
     "download": "parkour-25-levels-2.mctemplate"
   },
   {
     "title": "Supereasymaps hub 2 (v1.1)",
-    "desc": "Supereasymaps hub 2 is a new version of the original hub by Supereasymaps\nWith permission from Supereasymaps I have been operating at full capacity for 1 week\nMap have new features:Shop,Events,Change log and News\nNow enjoy it!\nWarning:This is template map so after import,click create and scroll down",
+    "desc": "Supereasymaps hub 2 is a new version of the original hub by Supereasymaps\nWith permission from Supereasymaps I have been operating at full capacity for 1 week\nNow enjoy it!\nWarning:This is template map so after import,click create and scroll down",
     "category": "map",
     "type": "parkours",
     "image": "supereasymaps.jpg",
@@ -130,7 +130,7 @@
       "sem_4.png",
       "sem_5.png"
     ],
-
+    "changelog": "Supereasymaps hub 2 (v1.1) update:add 2 parkour(The Parkour,Strange Parkour)\nMap have new features:Shop,Events,Change log and News",
     "version": "Minecraft Bedrock 1.21.70+",
     "download": "supereasymaps-hub-2-v1-1.mctemplate"
   }
