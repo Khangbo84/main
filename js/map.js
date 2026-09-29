@@ -101,7 +101,7 @@ function openPopup(data) {
   if (Array.isArray(data.gallery)) {
     data.gallery.forEach(src => {
       const img = document.createElement("img");
-      img.src = src;
+      img.src = config.galleryPath + src;
       img.onclick = () => openImage(src);
       gallery.appendChild(img);
     });
