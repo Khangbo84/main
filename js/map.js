@@ -78,13 +78,30 @@ function openPopup(data) {
   document.getElementById("popup-version").textContent = data.version || "";
   document.getElementById("popup-download").href = config.downloadPath + data.download || "#";
 
+  // ===== CHANGELOG =====
+  const changelog = document.getElementById("popup-changelog");
+  const changelogVersion = document.getElementById("popup-changelog-version");
+
+  changelog.textContent = data.changelog || "";
+
+  // Current data format has one changelog string, so the dropdown
+  // currently contains the current version. It is ready for future
+  // multi-version changelog data.
+  changelogVersion.innerHTML = "";
+
+  const currentVersion = document.createElement("option");
+  currentVersion.value = data.version || "";
+  currentVersion.textContent = data.version || "Current version";
+  currentVersion.selected = true;
+  changelogVersion.appendChild(currentVersion);
+
   const gallery = document.getElementById("popup-gallery");
   gallery.innerHTML = "";
 
   if (Array.isArray(data.gallery)) {
     data.gallery.forEach(src => {
       const img = document.createElement("img");
-      img.src = config.galleryPath + src;
+      img.src = src;
       img.onclick = () => openImage(src);
       gallery.appendChild(img);
     });
