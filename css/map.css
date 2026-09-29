@@ -69,6 +69,7 @@ body {
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
+  color: white;
 }
 
 .card img {
@@ -152,6 +153,7 @@ body {
 
 .popup-content {
   padding: 16px;
+  color: white;
 }
 
 /* ===== GALLERY DỌC ===== */
