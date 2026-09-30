@@ -81,12 +81,6 @@ body {
 .card-body {
   padding: 10px;
 }
-
-.type {
-  font-size: 12px;
-  opacity: 0.7;
-}
-
 /* ===== POPUP ===== */
 .popup.hidden { display: none; }
 
@@ -274,6 +268,7 @@ body.no-scroll {
   font-weight: 600;
   margin-left: 6px;
   font-size: 12px;
+  opacity: 1.0;
 }
 .parkours {
   background: #abfff2;
