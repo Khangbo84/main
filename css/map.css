@@ -287,7 +287,7 @@ body.no-scroll {
 /===font===/
 @font-face {
   font-family: 'MinecraftTen';
-  src: url(' ../MinecraftTen-VGORe.woff') format('woff');
+  src: url('../MinecraftTen-VGORe.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
