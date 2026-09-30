@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: minecraftTen;
+  font-family: "MinecraftTen";
   background: #0b1220;
   color: white;
   text-decoration: none; /* Bỏ gạch chân mặc định của thẻ a */
@@ -286,7 +286,7 @@ body.no-scroll {
 }
 /===font===/
 @font-face {
-  font-family: 'minecraftTen';
+  font-family: 'MinecraftTen';
   src: url(' ../MinecraftTen-VGORe.woff') format('woff');
   font-weight: normal;
   font-style: normal;
