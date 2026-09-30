@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: "MinecraftTen";
+  font-family: system-ui;
   background: #0b1220;
   color: white;
   text-decoration: none; /* Bỏ gạch chân mặc định của thẻ a */
@@ -13,6 +13,7 @@ body {
   text-align: center;
   padding: 30px 20px;
   color: white;
+  font-family: "MinecraftTen"
 }
 
 /* ===== CONTROLS ===== */
@@ -70,6 +71,7 @@ body {
   overflow: hidden;
   cursor: pointer;
   color: white;
+  font-family: "MinecraftTen";
 }
 
 .card img {
@@ -263,6 +265,7 @@ body.no-scroll {
   }
 .type {
   display: inline-block;
+  font-family: system-ui;
   padding: 3px 9px;
   border-radius: 999px;
   font-weight: 600;
