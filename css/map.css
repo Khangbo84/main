@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: system-ui;
+  font-family: minecraftTen;
   background: #0b1220;
   color: white;
   text-decoration: none; /* Bỏ gạch chân mặc định của thẻ a */
@@ -288,4 +288,11 @@ body.no-scroll {
   background: #dc0000;
   background: #dc0000
   color: #000000;
+}
+/===font===/
+@font-face {
+  font-family: 'minecraftTen';
+  src: url(' ../minecraftTen.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
