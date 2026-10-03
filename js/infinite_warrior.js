@@ -737,7 +737,7 @@
                     this.radius = 52;
                     this.speed = 1.35;
                     const bossTier = Math.floor(L / 10);
-                    this.maxHp = 1800 * Math.pow(1.8, bossTier - 1); // Significantly higher HP!
+                    this.maxHp = 10000 * Math.pow(1.8, bossTier - 1); // Significantly higher HP!
                     this.defense = 15 + Math.floor(L * 1.5); // High Armor layer
                     this.color = '#dc2626';
                     this.xpValue = 1000;
@@ -754,9 +754,9 @@
                 }
 
                 if (type === 'boss' && gameMode === 'tower') {
-                    this.maxHp = 500 + towerFloor * 140;
+                    this.maxHp = 5000 + towerFloor * 140;
                     this.defense = 8 + Math.floor(towerFloor * 0.9);
-                    this.xpValue = 300;
+                    this.xpValue = 3000;
                     this.name = `TRÙM TẦNG ${towerFloor}`;
                 }
                 this.gold = { slime: 4, bat: 5, soldier: 6, archer: 7, tank: 10, mage: 9, orc: 12, boss: 80 }[type] || 4;
