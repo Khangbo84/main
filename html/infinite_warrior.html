@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Chiến Binh Vô Hạn - Màn Hình Ngang & Hợp Nhất Thần Thoại</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/infinite_warrior.css">
+</head>
+<body class="relative w-screen h-screen overflow-hidden select-none bg-slate-950">
+
+    <!-- Game Viewport Canvas -->
+    <canvas id="gameCanvas" class="absolute inset-0 z-0"></canvas>
+
+    <!-- TOP LEFT HUD: HP/XP Bar & Skill Icons -->
+    <div id="hudTopLeft" class="absolute top-4 left-4 z-10 flex flex-col gap-2 pointer-events-none">
+        <div class="glass-panel p-2.5 px-3 rounded-2xl flex items-center gap-2.5 border-slate-700/60 pointer-events-auto w-[240px] flex-none shadow-lg">
+            <div id="playerLevelDisplay" class="flex items-center justify-center min-w-[38px] h-9 rounded-xl bg-amber-500/20 border border-amber-500/50 text-amber-400 font-black text-xs shadow-inner">
+                LV 1
+            </div>
+            <div class="flex-1 flex flex-col gap-1 min-w-0">
+                <div class="relative w-full h-3 bg-slate-900 rounded-full overflow-hidden border border-red-900/60">
+                    <div id="hpBar" class="h-full bg-gradient-to-r from-red-600 via-rose-500 to-pink-500 transition-all duration-200 rounded-full" style="width: 100%;"></div>
+                    <span id="hpText" class="absolute inset-0 flex items-center justify-center text-[9px] font-extrabold tracking-wider text-white drop-shadow">100 / 100</span>
+                </div>
+                <div class="relative w-full h-2 bg-slate-900 rounded-full overflow-hidden border border-cyan-900/60">
+                    <div id="xpBar" class="h-full bg-gradient-to-r from-cyan-500 to-blue-400 transition-all duration-200 rounded-full" style="width: 0%;"></div>
+                </div>
+                <div class="relative w-full h-2.5 bg-slate-900 rounded-full overflow-hidden border border-blue-900/60">
+                    <div id="manaBar" class="h-full bg-gradient-to-r from-blue-600 to-sky-400 transition-all duration-150 rounded-full" style="width: 100%;"></div>
+                    <span id="manaText" class="absolute inset-0 flex items-center justify-center text-[7px] font-extrabold text-white">100 / 100</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="activeSkillsBar" class="glass-panel p-1.5 px-2 rounded-xl flex items-center gap-1.5 overflow-x-auto pointer-events-auto border-slate-800/80 max-w-[240px] min-h-[38px]">
+            <!-- Dynamic Icons Inserted Here -->
+        </div>
+        <button id="statsBtn" style="display:none" class="pointer-events-auto glass-panel px-3 py-1.5 rounded-xl border-amber-500/50 text-amber-400 text-[11px] font-black items-center gap-1.5 self-start">
+            <i class="fa-solid fa-star"></i> ĐIỂM KỸ NĂNG <span id="statsBadge" class="bg-amber-500 text-slate-950 rounded-full px-1.5">0</span>
+        </button>
+    </div>
+
+    <!-- TOP CENTER: Boss Health Bar -->
+    <div id="bossHpContainer" class="hidden absolute top-4 left-1/2 -translate-x-1/2 z-10 glass-panel rounded-2xl p-2.5 px-5 w-[85%] max-w-md border-red-500/60 shadow-red-900/30">
+        <div class="flex justify-between items-center mb-1">
+            <span id="bossName" class="text-xs font-black tracking-wider text-red-400 uppercase flex items-center gap-1.5">
+                <i class="fa-solid fa-skull-crossbones text-red-500 animate-bounce"></i> TRÙM TỐI CAO
+            </span>
+        </div>
+        <div class="relative w-full h-4 bg-slate-900 rounded-full overflow-hidden border border-red-600/60">
+            <div id="bossHpBar" class="h-full bg-gradient-to-r from-red-600 via-orange-500 to-amber-400 transition-all duration-150" style="width: 100%;"></div>
+            <span id="bossHpText" class="absolute inset-0 flex items-center justify-center text-[10px] font-black text-white" style="text-shadow:0 1px 3px #000">0 / 0</span>
+        </div>
+    </div>
+
+    <!-- TOP RIGHT HUD -->
+    <div id="hudTopRight" class="absolute top-4 right-4 z-10 flex items-center gap-2 pointer-events-auto">
+        <div class="glass-panel px-3 py-1.5 rounded-xl flex items-center gap-3 text-xs font-bold border-slate-800 shadow-lg">
+            <div class="text-center">
+                <div class="text-[9px] uppercase tracking-wider text-gray-400">Thời Gian</div>
+                <div id="timeDisplay" class="text-emerald-400 font-extrabold">00:00</div>
+            </div>
+            <div class="h-6 w-[1px] bg-slate-800"></div>
+            <div class="text-center">
+                <div class="text-[9px] uppercase tracking-wider text-gray-400">Đã Tiêu Diệt</div>
+                <div id="killDisplay" class="text-amber-400 font-extrabold">0</div>
+            </div>
+        </div>
+
+        <button id="muteBtn" class="glass-panel p-2.5 rounded-xl hover:bg-slate-800 text-slate-300 hover:text-white transition shadow-lg">
+            <i class="fa-solid fa-volume-high text-sm"></i>
+        </button>
+
+        <button id="pauseBtn" class="glass-panel p-2.5 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border-amber-500/40 transition flex items-center gap-1.5 font-bold text-xs shadow-lg">
+            <i class="fa-solid fa-pause"></i> <span class="hidden sm:inline">TẠM DỪNG</span>
+        </button>
+    </div>
+
+    <!-- COMBAT BUTTONS -->
+    <div id="combatButtonsContainer" class="absolute bottom-5 right-5 z-20 flex items-end gap-2.5 pointer-events-auto">
+        <!-- Normal Attack -->
+        <button id="normalAttackBtn" aria-label="Đánh thường"
+                class="relative w-[68px] h-[68px] rounded-2xl glass-panel border-2 border-red-500/50 bg-slate-900/90 flex flex-col items-center justify-center text-red-400 shadow-xl active:scale-95 transition overflow-hidden">
+            <span id="weaponIcon" class="text-2xl leading-none">🗡️</span>
+            <div id="comboPips" class="absolute top-1 flex gap-1"></div>
+            <span id="weaponLabel" class="absolute bottom-1 text-[8px] font-black text-slate-400 uppercase">Đánh</span>
+            <div id="normalAttackCdOverlay" class="hidden absolute inset-0 bg-slate-950/80 flex items-center justify-center font-black text-sm text-red-300">
+                0.1s
+            </div>
+        </button>
+
+        <div id="activeSkillButtonsContainer" class="flex gap-2.5 pointer-events-auto">
+            <button id="activeBtnSlot0" class="relative w-16 h-16 rounded-2xl glass-panel border-2 border-amber-500/50 bg-slate-900/90 flex flex-col items-center justify-center text-amber-400 shadow-xl active:scale-95 transition overflow-hidden">
+                <i id="activeIconSlot0" class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+                <span id="activeKeyHintSlot0" class="absolute bottom-1 text-[9px] font-black text-slate-400 uppercase">Phím 1</span>
+                <div id="activeCdOverlay0" class="hidden absolute inset-0 bg-slate-950/80 flex items-center justify-center font-black text-sm text-amber-300">0.0s</div>
+            </button>
+
+            <button id="activeBtnSlot1" class="relative w-16 h-16 rounded-2xl glass-panel border-2 border-slate-700 bg-slate-900/90 flex flex-col items-center justify-center text-gray-500 shadow-xl active:scale-95 transition overflow-hidden">
+                <i id="activeIconSlot1" class="fa-solid fa-lock text-xl"></i>
+                <span id="activeKeyHintSlot1" class="absolute bottom-1 text-[9px] font-black text-slate-400 uppercase">Phím 2</span>
+                <div id="activeCdOverlay1" class="hidden absolute inset-0 bg-slate-950/80 flex items-center justify-center font-black text-sm text-cyan-300">0.0s</div>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODALS -->
+    <div id="swapSkillModal" class="hidden absolute inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-4">
+        <div class="glass-panel p-5 rounded-3xl max-w-md w-full border-amber-500/40 text-center shadow-2xl">
+            <h3 class="text-xl font-black text-amber-400 mb-1 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-arrows-rotate"></i> Ô KỸ NĂNG ĐÃ ĐẦY (2/2)
+            </h3>
+            <p id="swapModalSubtext" class="text-xs text-gray-300 mb-4">Chọn ô muốn thay thế (kỹ năng bị thay sẽ mất cấp độ) hoặc bỏ qua:</p>
+            <div id="swapChoicesContainer" class="space-y-2.5 mb-4"></div>
+            <button id="cancelSwapBtn" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-gray-300 font-bold text-xs uppercase tracking-wider border border-slate-700">
+                BỎ QUA KỸ NĂNG MỚI
+            </button>
+        </div>
+    </div>
+
+    <!-- PAUSE & INSPECT MODAL -->
+    <div id="pauseModal" class="hidden absolute inset-0 z-40 flex items-center justify-center bg-slate-950/85 backdrop-blur-md p-4">
+        <div class="glass-panel p-5 md:p-6 rounded-3xl max-w-2xl w-full flex flex-col max-h-[90vh] border-slate-700 shadow-2xl">
+            <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-800">
+                <div>
+                    <h2 class="text-2xl font-black text-white flex items-center gap-2">
+                        <i class="fa-solid fa-circle-pause text-amber-400"></i> GAME TẠM DỪNG
+                    </h2>
+                    <p class="text-xs text-gray-400 mt-0.5">Chi tiết Kỹ Năng, Thuộc Tính & Hợp Nhất Thần Thoại</p>
+                </div>
+                <div class="flex gap-2"><button class="open-settings py-2 px-3 rounded-xl bg-slate-700 text-white font-black text-xs">⚙️</button><button id="adminBtn" class="py-2 px-3 rounded-xl bg-rose-600 text-white font-black text-xs uppercase">🛠 Admin</button><button id="resumeBtn" class="py-2 px-5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/20">
+                    TIẾP TỤC
+                </button></div>
+            </div>
+            <div class="flex-1 overflow-y-auto space-y-4 pr-1">
+                <div>
+                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-400 mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-bolt"></i> Kỹ Năng & Thuộc Tính Đã Sở Hữu
+                    </h3>
+                    <div id="inspectSkillsGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5"></div>
+                </div>
+                <div>
+                    <h3 class="text-xs font-extrabold uppercase tracking-wider text-cyan-400 mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Công Thức Hợp Nhất Thần Thoại (Cyan)
+                    </h3>
+                    <div id="fusionRecipesContainer" class="space-y-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LEVEL UP MODAL -->
+    <div id="levelUpModal" class="hidden absolute inset-0 z-30 flex flex-col items-center justify-center bg-slate-950/90 backdrop-blur-md p-4 sm:p-6">
+        <div class="text-center mb-3 animate-bounce">
+            <span class="text-[10px] font-black tracking-widest text-amber-400 uppercase bg-amber-500/20 px-3 py-1 rounded-full border border-amber-500/40">Thăng Cấp!</span>
+            <h2 id="modalLevelTitle" class="text-2xl sm:text-3xl font-black text-white mt-1 drop-shadow-md">CHỌN NÂNG CẤP</h2>
+        </div>
+        <div id="cardsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-3.5 max-w-4xl w-full max-h-[70vh] overflow-y-auto p-2"></div>
+    </div>
+
+    <!-- START OVERLAY -->
+    <div id="startOverlay" class="absolute inset-0 z-40 flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-black p-4">
+        <button class="open-settings glass-panel w-11 h-11 rounded-xl text-xl" aria-label="Cài đặt" style="position:fixed; top:max(10px, env(safe-area-inset-top)); right:max(12px, env(safe-area-inset-right)); z-index:45">⚙️</button>
+        <div class="glass-panel p-6 sm:p-8 rounded-3xl max-w-md w-full text-center border-amber-500/30 relative overflow-hidden shadow-2xl">
+            <div class="w-16 h-16 bg-amber-500/20 rounded-2xl border border-amber-500/40 text-amber-400 text-3xl mx-auto flex items-center justify-center mb-3 shadow-lg">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white mb-1">CHIẾN BINH VÔ HẠN</h1>
+            <p class="text-gray-400 text-xs mb-4">Chiến đấu - Hợp Nhất Thần Thoại - Diệt Trùm Tối Cao!</p>
+            <div class="space-y-2.5">
+            <button id="startBtn" class="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm tracking-wider uppercase transition shadow-lg shadow-amber-500/25 active:scale-95">
+                <i class="fa-solid fa-infinity"></i> SINH TỒN VÔ HẠN
+            </button>
+            <button id="startTowerBtn" class="w-full py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-black text-sm tracking-wider uppercase transition shadow-lg shadow-cyan-500/25 active:scale-95">
+                <i class="fa-solid fa-chess-rook"></i> LEO THÁP (30 TẦNG)
+            </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAME OVER OVERLAY -->
+    <div id="gameOverOverlay" class="hidden absolute inset-0 z-40 flex items-center justify-center bg-slate-950/90 backdrop-blur-lg p-4">
+        <div class="glass-panel p-6 sm:p-8 rounded-3xl max-w-md w-full text-center border-red-500/40 shadow-2xl">
+            <div class="w-16 h-16 bg-red-500/20 rounded-2xl border border-red-500/40 text-red-500 text-3xl mx-auto flex items-center justify-center mb-3">
+                <i class="fa-solid fa-skull"></i>
+            </div>
+            <h2 id="gameOverTitle" class="text-2xl sm:text-3xl font-black text-red-500 tracking-tight mb-1">BẠN ĐÃ HY SINH!</h2>
+            <p id="gameOverSub" class="text-gray-400 text-xs mb-5">Đấu trường đã nuốt chửng linh hồn bạn...</p>
+            <div class="grid grid-cols-2 gap-3 mb-5">
+                <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-800 text-center">
+                    <span class="text-[9px] text-gray-400 uppercase tracking-widest block">Cấp Độ</span>
+                    <span id="finalLevel" class="text-xl font-extrabold text-amber-400">LV 1</span>
+                </div>
+                <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-800 text-center">
+                    <span class="text-[9px] text-gray-400 uppercase tracking-widest block">Số Quái Diệt</span>
+                    <span id="finalKills" class="text-xl font-extrabold text-emerald-400">0</span>
+                </div>
+            </div>
+            <button id="restartBtn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-black text-base tracking-wider uppercase transition shadow-lg shadow-red-600/30 active:scale-95">
+                CHƠI LẠI TỪ ĐẦU
+            </button>
+            <button id="menuBtn" class="w-full mt-2 py-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-gray-200 font-bold text-xs uppercase tracking-wider border border-slate-700">VỀ MENU CHỌN CHẾ ĐỘ</button>
+        </div>
+    </div>
+
+    <!-- TOWER INFO + FLOOR BANNER -->
+    <div id="towerInfo" style="display:none; top:62px" class="absolute left-1/2 -translate-x-1/2 z-10 glass-panel px-3 py-1 rounded-xl text-[11px] font-black text-amber-300 pointer-events-none"></div>
+    <div id="floorBanner" class="hidden absolute inset-0 z-[35] flex flex-col items-center justify-center pointer-events-none">
+        <div id="floorBannerTitle" class="text-5xl sm:text-6xl font-black text-white tracking-widest animate-pulse" style="text-shadow:0 0 30px rgba(251,191,36,.7)">TẦNG 1</div>
+        <div id="floorBannerSub" class="text-sm font-bold text-amber-400 mt-2 text-center px-4"></div>
+    </div>
+
+    <!-- STATS MODAL -->
+    <div id="statsModal" class="hidden absolute inset-0 z-40 flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-3">
+        <div class="glass-panel p-4 rounded-3xl max-w-md w-full border-amber-500/40 shadow-2xl max-h-[95%] overflow-y-auto">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="text-lg font-black text-amber-400"><i class="fa-solid fa-star"></i> ĐIỂM KỸ NĂNG: <span id="statsPoints">0</span></h3>
+                <button id="statsCloseBtn" class="py-1.5 px-4 rounded-xl bg-amber-500 text-slate-950 font-black text-xs uppercase">Đóng</button>
+            </div>
+            <div id="statsRows" class="space-y-2"></div>
+        </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="settingsModal" class="hidden fixed inset-0 flex items-center justify-center bg-slate-950/90 p-3" style="z-index:60">
+        <div class="glass-panel p-4 rounded-3xl max-w-sm w-full border-amber-500/40 shadow-2xl">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-base font-black text-amber-400">⚙️ CÀI ĐẶT</h3>
+                <button id="settingsCloseBtn" class="py-1.5 px-4 rounded-xl bg-amber-500 text-slate-950 font-black text-xs uppercase">Đóng</button>
+            </div>
+            <div class="space-y-2">
+                <div class="flex items-center justify-between gap-3 p-3 rounded-2xl bg-slate-900/80 border border-slate-700">
+                    <div class="min-w-0">
+                        <div class="text-sm font-black text-white">Chế độ máy yếu</div>
+                        <div class="text-[11px] text-gray-400 leading-snug">Cắt bóng sáng, vệt đạn, blur, bớt hạt & chữ nổi để chơi mượt hơn.</div>
+                    </div>
+                    <button id="toggleLowEnd" class="tg" role="switch" aria-label="Chế độ máy yếu"></button>
+                </div>
+                <div class="flex items-center justify-between gap-3 p-3 rounded-2xl bg-slate-900/80 border border-slate-700">
+                    <div class="min-w-0">
+                        <div class="text-sm font-black text-white">Tắt rung</div>
+                        <div class="text-[11px] text-gray-400 leading-snug">Không rung màn hình khi đánh mạnh, boss lướt, thiên thạch...</div>
+                    </div>
+                    <button id="toggleNoShake" class="tg" role="switch" aria-label="Tắt rung"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN -->
+    <div id="adminModal" class="hidden absolute inset-0 z-50 flex items-center justify-center bg-slate-950/95 backdrop-blur-md p-2">
+        <div class="glass-panel p-3 rounded-3xl max-w-2xl w-full border-rose-500/50 shadow-2xl flex flex-col" style="max-height:96%">
+            <div class="flex items-center justify-between mb-2">
+                <h3 class="text-base font-black text-rose-400">🛠 ADMIN PANEL</h3>
+                <button id="adminCloseBtn" class="py-1.5 px-4 rounded-xl bg-rose-600 text-white font-black text-xs uppercase">Đóng</button>
+            </div>
+            <div id="adminBody" class="overflow-y-auto space-y-3 pr-1"></div>
+        </div>
+    </div>
+
+    <!-- SHOP -->
+    <div id="shopModal" class="hidden absolute inset-0 z-40 flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-2">
+        <div class="glass-panel p-3 rounded-3xl max-w-3xl w-full border-amber-500/40 shadow-2xl flex flex-col" style="max-height:96%">
+            <div class="flex items-center justify-between gap-2 mb-2 flex-wrap">
+                <h3 class="text-base sm:text-lg font-black text-amber-400">🛒 CỬA HÀNG</h3>
+                <div class="flex items-center gap-3 text-xs font-black">
+                    <span class="text-yellow-300">💰 <span id="shopGold">0</span></span>
+                    <span class="text-cyan-300">⏱ <span id="shopTimer">60</span>s</span>
+                    <button id="shopLeaveBtn" class="py-1.5 px-3 rounded-xl bg-amber-500 text-slate-950 font-black text-xs uppercase">Tiếp tục leo</button>
+                </div>
+            </div>
+            <div id="shopItems" class="grid grid-cols-2 sm:grid-cols-3 gap-2 overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <!-- Touch Zone for Mobile -->
+    <div id="touchZone" class="absolute inset-0 z-10 pointer-events-auto md:hidden"></div>
+
+    <script src="../js/infinite_warrior.js></script>
+</body>
+</html>
