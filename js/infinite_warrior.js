@@ -89,7 +89,7 @@ const CONFIG = {
 
     // ----- CHẾ ĐỘ THÁP (100 tầng) -----
     tower: {
-        arenaRadius: 340, maxFloor: 100, introSec: 5, bossEvery: 5,
+        arenaRadius: 340, maxFloor: 100, introSec: 3, bossEvery: 5,
         firstFloorMonsters: 5, monstersPerFloor: 2.2, maxMonsters: 70, bossFloorMonsterRatio: 0.6,
         difficultyPerFloor: 0.7,       // "cấp quái" tăng bao nhiêu mỗi tầng
         monsterDmgGrowth: 0.02,        // sát thương quái tăng thêm mỗi tầng (x(1 + (tầng-1) * giá trị))
