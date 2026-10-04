@@ -84,21 +84,22 @@
 
             // ----- CHẾ ĐỘ THÁP -----
             tower: {
-                arenaRadius: 340, maxFloor: 30, introSec: 5, bossEvery: 5,
+                arenaRadius: 340, maxFloor: 100, introSec: 3, bossEvery: 5,
                 firstFloorMonsters: 5, monstersPerFloor: 2.2, bossFloorMonsterRatio: 0.6,
                 difficultyPerFloor: 0.7,       // "cấp quái" tăng bao nhiêu mỗi tầng
                 healOnClear: 0.3,              // hồi % máu khi qua tầng
                 unlockFloor: { soldier: 2, bat: 3, archer: 4, tank: 6, mage: 8 }, // tầng bắt đầu xuất hiện
-                boss: { hpPerStep: 10000, defBase: 8, defPerFloor: 0.9, xp: 300, gold: 80 }, // máu = hpPerStep * (tầng / bossEvery)
-                shopFloors: [10, 20, 30], shopSeconds: 60,
-                affixFloors: { 3:'fast', 7:'armored', 8:'frenzy', 9:'regen', 12:'explode', 13:'fast', 14:'frenzy', 16:'regen', 17:'armored', 19:'regen', 21:'fast', 22:'explode', 24:'armored', 26:'explode', 27:'frenzy', 28:'armored', 29:'frenzy' },
+                boss: { hpPerStep: 10000, defBase: 8, defPerFloor: 0.9, xp: 1000, gold: 80 }, // máu = hpPerStep * (tầng / bossEvery)
+                shopFloors: [10, 20, 30, 40, 50, 60, 70, 80, 90], shopSeconds: 60,
+                affixFloors: {3:'fast', 7:'armored', 8:'frenzy', 9:'regen', 12:'explode', 13:'fast', 14:'frenzy', 16:'regen', 17:'armored', 19:'regen', 21:'fast', 22:'explode', 24:'armored', 26:'explode', 27:'frenzy', 28:'armored', 29:'frenzy'},
                 bosses: {
-                    5:  { name: 'SLIME CHÚA',          color: '#22c55e', skills: ['summon'],             desc: 'Triệu hồi đàn quái' },
-                    10: { name: 'PHÁP SƯ BÓNG TỐI',    color: '#a855f7', skills: ['meteors'],            desc: 'Mưa thiên thạch' },
-                    15: { name: 'XẠ THỦ TỬ THẦN',      color: '#84cc16', skills: ['beam'],               desc: 'Tia tử thần xuyên thẳng' },
-                    20: { name: 'HỘ VỆ THÉP',          color: '#64748b', skills: ['shield', 'slam'],     desc: 'Giáp thép giảm sát thương & đập đất' },
-                    25: { name: 'BÓNG MA XUYÊN KHÔNG', color: '#38bdf8', skills: ['teleport', 'spiral'], desc: 'Dịch chuyển & đạn xoắn ốc' },
-                    30: { name: 'CHÚA TỂ THÁP',        color: '#f43f5e', skills: ['meteors', 'beam', 'summon', 'slam', 'spiral'], desc: 'Tổng hợp mọi tuyệt kỹ' }
+                    5:  { name: 'SLIME',               color: '#22705e', decs: 'Đầy tớ của SLIME CHÚA' },
+                    10: { name: 'SLIME CHÚA',          color: '#22c55e', skills: ['summon'],             desc: 'Triệu hồi đàn quái' },
+                    20: { name: 'PHÁP SƯ BÓNG TỐI',    color: '#a855f7', skills: ['meteors'],            desc: 'Mưa thiên thạch' },
+                    30: { name: 'XẠ THỦ TỬ THẦN',      color: '#84cc16', skills: ['beam'],               desc: 'Tia tử thần xuyên thẳng' },
+                    50: { name: 'HỘ VỆ THÉP',          color: '#64748b', skills: ['shield', 'slam'],     desc: 'Giáp thép giảm sát thương & đập đất' },
+                    70: { name: 'BÓNG MA XUYÊN KHÔNG', color: '#38bdf8', skills: ['teleport', 'spiral'], desc: 'Dịch chuyển & đạn xoắn ốc' },
+                    100:{ name: 'CHÚA TỂ THÁP',        color: '#f43f5e', skills: ['meteors', 'beam', 'summon', 'slam', 'spiral'], desc: 'Tổng hợp mọi tuyệt kỹ' }
                 }
             },
 
@@ -244,7 +245,7 @@
             weapon: 'sword', comboStep: 0, comboTimer: 0, gold: 0, shield: 0, shieldTimer: 0,
 
             // Skill Slots
-            activeSlots: ['dagger', null],
+            activeSlots: [null, null],
             activeCdTimers: [0, 0],
 
             // Skill Registry
