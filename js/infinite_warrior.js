@@ -175,7 +175,7 @@
         function persist() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(SAVE)); } catch (e) {} }
 
         // ===== ASSET (ảnh) — cấu hình qua assets/assets.json (fetch). Không có file thì dùng bản mặc định bên dưới =====
-        const ASSET_URL = 'assets/assets.json';
+        const ASSET_URL = '../configuration/assets.json';
         const svgURI = t => 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(t);
         const SVG = {
             crown: "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"64\" height=\"48\" viewBox=\"0 0 64 48\"><path d=\"M4 42 L8 12 L22 28 L32 6 L42 28 L56 12 L60 42 Z\" fill=\"#fbbf24\" stroke=\"#b45309\" stroke-width=\"3\" stroke-linejoin=\"round\"/><circle cx=\"8\" cy=\"10\" r=\"4\" fill=\"#ef4444\"/><circle cx=\"32\" cy=\"5\" r=\"4\" fill=\"#38bdf8\"/><circle cx=\"56\" cy=\"10\" r=\"4\" fill=\"#ef4444\"/></svg>",
