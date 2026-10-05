@@ -833,14 +833,14 @@
             } else if (id === 'dual') {
     // Cây kiếm bên trái (dưới)
     c.save();
-    c.translate(-6, 12); // Dịch sang bên trái và xuống dưới tay trái
+    c.translate(-7, 12); // Dịch sang bên trái và xuống dưới tay trái
     hilt(); 
     blade(28, 3, '#7dd3fc', '#0284c7'); 
     c.restore();
 
     // Cây kiếm bên phải (trên)
     c.save();
-    c.translate(6, -12);  // Dịch sang bên phải và lên trên tay phải
+    c.translate(7, -12);  // Dịch sang bên phải và lên trên tay phải
     hilt(); 
     blade(28, 3, '#fdba74', '#ea580c'); 
     c.restore();
