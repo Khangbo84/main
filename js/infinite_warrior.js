@@ -29,7 +29,7 @@
             // ----- KỸ NĂNG CHỦ ĐỘNG -----
             activeSkills: {
                 cdReducePerLevel: 0.2, minCd: 0.6,   // mỗi cấp giảm cooldown / cooldown tối thiểu
-                dagger:    { cd: 1.5,  mana: 12, dmg: 40,  dmgGrowth: 0.3, countBase: 3, countPerLevel: 2, speed: 10, life: 100 },
+                dagger:    { cd: 1.5,  mana: 12, dmg: 30,  dmgGrowth: 0.3, countBase: 3, countPerLevel: 2, speed: 10, life: 100 },
                 lightning: { cd: 3.0,  mana: 20, dmg: 90,  countBase: 2, countPerLevel: 1 },            // dmg x cấp
                 laser:     { cd: 4.5,  mana: 30, dmg: 160, range: 650, halfAngle: 0.38 },               // dmg x cấp
                 nova:      { cd: 5.0,  mana: 25, dmg: 70,  radiusBase: 140, radiusPerLevel: 14, freezeSec: 1.25 }, // dmg x cấp
@@ -47,14 +47,14 @@
                 orbit: { dmg: 5, radius: 80, countBase: 2, speed: 0.04 },                 // số lưỡi = countBase + cấp
                 aura:  { dmg: 1.2, radiusBase: 85, radiusPerLevel: 12 }                   // sát thương mỗi khung hình
             },
-            freeze: { sec: 1, bossSec: 0.5, immuneSec: 4 },
+            freeze: { sec: 3, bossSec: 1, immuneSec: 4 },
 
             // ----- KỸ NĂNG CYAN (thần thoại) -----
             fusion: {
-                blade:   { cd: 4, dmg: 55, count: 8, speed: 10 },
-                thunder: { cd: 3, dmg: 100, count: 5 },
-                storm:   { active: 6, cd: 7, dmg: 8, radius: 120, count: 8, speed: 0.08 },
-                vamp:    { active: 6, cd: 7, dmg: 1.8, radius: 130, heal: 0.5 }
+                blade:   { cd: 10, dmg: 100, count: 8, speed: 10 },
+                thunder: { cd: 15, dmg: 200, count: 5 },
+                storm:   { active: 6, cd: 20, dmg: 30, radius: 120, count: 8, speed: 0.08 },
+                vamp:    { active: 6, cd: 20, dmg: 18, radius: 130, heal: 0.5 }
             },
 
             // ----- ĐIỂM KỸ NĂNG (chế độ Tháp) -----
@@ -78,7 +78,7 @@
                 mage:    { radius: 13, speed: 1.3,  hp: 26,  hpGrowth: 0.25, def: 0,  defPerLevel: 0,    xp: 35, damage: 6,  gold: 9,  color: '#e879f9',
                            range: 190, shootCd: 170, projDmg: 30, projGrowth: 0.06, projSpeed: 6.5, projColor: '#d946ef' },
                 // Boss chế độ Sinh Tồn: hp = hp * hpTierMult^(bậc-1), bậc = cấp/10
-                boss:    { radius: 52, speed: 1.35, hp: 1800, hpTierMult: 1.8, def: 15, defPerLevel: 1.5, xp: 1000, damage: 35, gold: 80, color: '#dc2626' }
+                boss:    { radius: 52, speed: 1.35, hp: 1800, hpTierMult: 1.8, def: 15, defPerLevel: 1.5, xp: 1000, damage: 50, gold: 80, color: '#dc2626' }
             },
             affix: { fastSpeed: 1.4, armorBonus: 8, frenzyDmg: 1.5, regenPct: 0.02, explodeDmg: 18, explodeRadius: 85 },
 
@@ -87,8 +87,8 @@
 
             // ----- CHẾ ĐỘ THÁP (100 tầng) -----
             tower: {
-                arenaRadius: 340, maxFloor: 100, introSec: 5, bossEvery: 5,
-                firstFloorMonsters: 5, monstersPerFloor: 2.2, maxMonsters: 70, bossFloorMonsterRatio: 0.6,
+                arenaRadius: 340, maxFloor: 100, introSec: 3, bossEvery: 5,
+                firstFloorMonsters: 5, monstersPerFloor: 2.2, maxMonsters: 60, bossFloorMonsterRatio: 0.6,
                 difficultyPerFloor: 0.7,       // "cấp quái" tăng bao nhiêu mỗi tầng
                 monsterDmgGrowth: 0.02,        // sát thương quái tăng thêm mỗi tầng (x(1 + (tầng-1) * giá trị))
                 healOnClear: 0.3,              // hồi % máu khi qua tầng
@@ -122,27 +122,27 @@
 
             // ----- KỸ NĂNG BOSS -----
             bossSkills: {
-                radialCount: 12, radialDmg: 18, radialSpeed: 4.5, radialInterval: 2.8,   // đạn vòng
+                radialCount: 12, radialDmg: 40, radialSpeed: 4.5, radialInterval: 2.8,   // đạn vòng
                 chargeInterval: 4.2, chargeSpeed: 8, chargeFrames: 38, windupFrames: 36,    // lướt (windup = thời gian báo trước)
                 enrageHpPct: 0.3, enrageSpeedMult: 1.4,
                 towerInterval: 4.8, finalInterval: 4.5, finalEnrageInterval: 3.5,          // nhịp tung chiêu riêng (tầng 30 nhanh hơn)
-                summonCount: 4, meteorCount: 5, finalMeteorCount: 7, meteorDmg: 28, meteorRadius: 70, meteorDelay: 52,
-                beamDmg: 35, beamWidth: 36, slamDmg: 30, slamRadius: 175, teleportDmg: 28,
-                shieldSec: 4, shieldReduce: 0.7, spiralDmg: 14,
-                fanDmg: 14, crossDmg: 30, poolDmg: 8, sweepDmg: 10, stunSec: 1.0,        // kỹ năng mới
+                summonCount: 4, meteorCount: 5, finalMeteorCount: 7, meteorDmg: 80, meteorRadius: 70, meteorDelay: 52,
+                beamDmg: 135, beamWidth: 36, slamDmg: 30, slamRadius: 175, teleportDmg: 28,
+                shieldSec: 4, shieldReduce: 0.7, spiralDmg: 100,
+                fanDmg: 140, crossDmg: 200, poolDmg: 80, sweepDmg: 100, stunSec: 1.0,        // kỹ năng mới
                 dmgPerFloor: 0.012,                                                      // sát thương chiêu boss tăng mỗi tầng
                 minInterval: 2.0, intervalDropPerFloor: 0.035,
                 delayScalePerFloor: 0.004, minDelayScale: 0.55,                          // thời gian báo trước ngắn dần theo tầng
                 catchUp: { startDist: 230, range: 380, maxBonus: 1.3 },                  // boss chạy nhanh hơn khi bạn kéo giãn khoảng cách
-                megaDmg: 26, cageDmg: 9, immuneSec: 5,                                  // kỹ năng mới: đại chấn động, lồng laser, miễn debuff
+                megaDmg: 66, cageDmg: 59, immuneSec: 5,                                  // kỹ năng mới: đại chấn động, lồng laser, miễn debuff
                 centerSpeedMul: 4.5, centerHold: { megaNova: 130, cageLasers: 230, bulletStorm: 240 }  // boss lao về giữa sàn rồi thi triển                             // nhịp tung chiêu: càng lên cao càng nhanh
             },
 
             // ----- VÀNG & CỬA HÀNG -----
             shop: {
-                prices: { sword: 250, hammer: 300, dual: 350, bow: 250, spear: 300, axe: 320, staff: 350 },
-                hpPotion: { price: 60, heal: 0.6 },   // hồi % máu tối đa
-                mpPotion: { price: 60 }
+                prices: { sword: 2500, hammer: 3000, dual: 3500, bow: 2500, spear: 3000, axe: 3200, staff: 3500 },
+                hpPotion: { price: 600, heal: 0.6 },   // hồi % máu tối đa
+                mpPotion: { price: 600 }
             },
 
             // ----- HIỆU ỨNG TRẠNG THÁI (thẻ Lửa / Độc / Sóng) -----
