@@ -1,0 +1,90 @@
+{
+  "skinColors": [
+    "#facc15",
+    "#fb923c",
+    "#f87171",
+    "#f472b6",
+    "#c084fc",
+    "#818cf8",
+    "#38bdf8",
+    "#2dd4bf",
+    "#4ade80",
+    "#a3e635",
+    "#e2e8f0",
+    "#94a3b8"
+  ],
+  "accessories": [
+    {
+      "id": "crown",
+      "name": "Vương miện",
+      "src": "assets/acc/crown.svg",
+      "offsetX": 0,
+      "offsetY": -20,
+      "width": 30,
+      "rotate": 0,
+      "rotateWithFacing": false,
+      "layer": "front"
+    },
+    {
+      "id": "glasses",
+      "name": "Kính đen",
+      "src": "assets/acc/glasses.svg",
+      "offsetX": 0,
+      "offsetY": -3,
+      "width": 26,
+      "rotate": 0,
+      "rotateWithFacing": false,
+      "layer": "front"
+    },
+    {
+      "id": "cape",
+      "name": "Áo choàng",
+      "src": "assets/acc/cape.svg",
+      "offsetX": -12,
+      "offsetY": 0,
+      "width": 34,
+      "rotate": 0,
+      "rotateWithFacing": true,
+      "layer": "back"
+    }
+  ],
+  "weaponSkins": [
+    {
+      "id": "sword_fire",
+      "weapon": "sword",
+      "name": "Kiếm Lửa",
+      "src": "assets/weapons/sword_fire.svg",
+      "length": 66,
+      "pivot": 0.1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotate": 0
+    },
+    {
+      "id": "spear_gold",
+      "weapon": "spear",
+      "name": "Giáo Vàng",
+      "src": "assets/weapons/spear_gold.svg",
+      "length": 78,
+      "pivot": 0.1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotate": 0
+    },
+    {
+      "id": "staff_star",
+      "weapon": "staff",
+      "name": "Trượng Sao",
+      "src": "assets/weapons/staff_star.svg",
+      "length": 60,
+      "pivot": 0.1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotate": 0
+    }
+  ],
+  "player": null,
+  "enemies": {},
+  "bosses": {},
+  "background": {}
+}
