@@ -29,12 +29,12 @@
             // ----- KỸ NĂNG CHỦ ĐỘNG -----
             activeSkills: {
                 cdReducePerLevel: 0.2, minCd: 0.6,   // mỗi cấp giảm cooldown / cooldown tối thiểu
-                dagger:    { cd: 1.5,  mana: 12, dmg: 30,  dmgGrowth: 0.3, countBase: 3, countPerLevel: 2, speed: 10, life: 100 },
-                lightning: { cd: 3.0,  mana: 20, dmg: 90,  countBase: 2, countPerLevel: 1 },            // dmg x cấp
-                laser:     { cd: 4.5,  mana: 30, dmg: 160, range: 650, halfAngle: 0.38 },               // dmg x cấp
-                nova:      { cd: 5.0,  mana: 25, dmg: 70,  radiusBase: 140, radiusPerLevel: 14, freezeSec: 1.25 }, // dmg x cấp
-                meteor:    { cd: 6.0,  mana: 28, dmg: 150, radius: 90, delayFrames: 48, countBase: 1, levelsPerExtra: 2 }, // dmg x cấp
-                shield:    { cd: 12.0, mana: 22, absorbBase: 40, absorbPerLevel: 25, duration: 6 }
+                dagger:    { cd: 10.0,  mana: 30, dmg: 30,  dmgGrowth: 0.3, countBase: 3, countPerLevel: 2, speed: 10, life: 100 },
+                lightning: { cd: 10.5,  mana: 50, dmg: 90,  countBase: 2, countPerLevel: 1 },            // dmg x cấp
+                laser:     { cd: 35.0,  mana: 60, dmg: 160, range: 650, halfAngle: 0.38 },               // dmg x cấp
+                nova:      { cd: 20.0,  mana: 55, dmg: 70,  radiusBase: 140, radiusPerLevel: 14, freezeSec: 1.25 }, // dmg x cấp
+                meteor:    { cd: 25.0,  mana: 65, dmg: 150, radius: 90, delayFrames: 48, countBase: 1, levelsPerExtra: 2 }, // dmg x cấp
+                shield:    { cd: 12.0, mana: 30, absorbBase: 40, absorbPerLevel: 25, duration: 6 }
             },
 
             // ----- NỘI TẠI (mỗi cấp) -----
@@ -54,7 +54,7 @@
                 blade:   { cd: 10, dmg: 100, count: 8, speed: 10 },
                 thunder: { cd: 15, dmg: 200, count: 5 },
                 storm:   { active: 6, cd: 20, dmg: 30, radius: 120, count: 8, speed: 0.08 },
-                vamp:    { active: 6, cd: 20, dmg: 18, radius: 130, heal: 0.5 }
+                vamp:    { active: 6, cd: 20, dmg: 25, radius: 130, heal: 0.5 }
             },
 
             // ----- ĐIỂM KỸ NĂNG (chế độ Tháp) -----
