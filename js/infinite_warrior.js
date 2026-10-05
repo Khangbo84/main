@@ -831,9 +831,21 @@
                 c.fillStyle = W.color; c.fillRect(30, -11, 4, 22); c.fillRect(42, -11, 4, 22);
                 c.strokeStyle = '#334155'; c.lineWidth = 1.2; c.strokeRect(30, -11, 16, 22);
             } else if (id === 'dual') {
-                c.save(); c.rotate(-0.4); c.translate(0, -4); hilt(); blade(30, 3, '#7dd3fc', '#0284c7'); c.restore();
-                c.save(); c.rotate(0.4); c.translate(0, 4); hilt(); blade(30, 3, '#fdba74', '#ea580c'); c.restore();
-            } else if (id === 'bow') {
+    // Cây kiếm bên trái (dưới)
+    c.save();
+    c.translate(-6, 12); // Dịch sang bên trái và xuống dưới tay trái
+    hilt(); 
+    blade(28, 3, '#7dd3fc', '#0284c7'); 
+    c.restore();
+
+    // Cây kiếm bên phải (trên)
+    c.save();
+    c.translate(6, -12);  // Dịch sang bên phải và lên trên tay phải
+    hilt(); 
+    blade(28, 3, '#fdba74', '#ea580c'); 
+    c.restore();
+            }
+            else if (id === 'bow') {
                 c.strokeStyle = '#92400e'; c.lineWidth = 3.5; c.beginPath(); c.arc(4, 0, 24, -1.15, 1.15); c.stroke();
                 const bx = 4 + 24 * Math.cos(1.15), by = 24 * Math.sin(1.15);
                 c.strokeStyle = '#e2e8f0'; c.lineWidth = 1.2; c.beginPath(); c.moveTo(bx, -by); c.lineTo(bx - 6, 0); c.lineTo(bx, by); c.stroke();
