@@ -19,10 +19,10 @@ const CONFIG = {
         sword:  { dmg: 90,  cd: 0.32 },
         hammer: { dmg: 100, cd: 0.50 },
         dual:   { dmg: 80,  cd: 0.28 },
-        bow:    { dmg: 140, cd: 0.60, arrowSpeed: 16, arrowLife: 100, arrowRadius: 7 },
+        bow:    { dmg: 120, cd: 0.60, arrowSpeed: 16, arrowLife: 100, arrowRadius: 7 },
         spear:  { dmg: 95,  cd: 0.34 },
         axe:    { dmg: 110, cd: 0.45 },
-        staff:  { dmg: 105, cd: 0.42, orbSpeed: 11, orbLife: 50, orbRadius: 9 }
+        staff:  { dmg: 80, cd: 0.42, orbSpeed: 11, orbLife: 50, orbRadius: 9 }
     },
     comboPct: [0.2, 0.5, 0.9],   // % sát thương đòn 1 / 2 / 3 của vũ khí cận chiến
     comboResetSec: 1.4,          // ngừng đánh bao lâu thì combo về đòn 1
@@ -31,11 +31,11 @@ const CONFIG = {
     // ----- KỸ NĂNG CHỦ ĐỘNG -----
     activeSkills: {
         cdReducePerLevel: 0.2, minCd: 0.6,   // mỗi cấp giảm cooldown / cooldown tối thiểu
-        dagger:    { cd: 1.5,  mana: 12, dmg: 40,  dmgGrowth: 0.3, countBase: 3, countPerLevel: 2, speed: 10, life: 100 },
-        lightning: { cd: 3.0,  mana: 20, dmg: 90,  countBase: 2, countPerLevel: 1 },            // dmg x cấp
-        laser:     { cd: 4.5,  mana: 30, dmg: 160, range: 650, halfAngle: 0.38 },               // dmg x cấp
-        nova:      { cd: 5.0,  mana: 25, dmg: 70,  radiusBase: 140, radiusPerLevel: 14, freezeSec: 1.25 }, // dmg x cấp
-        meteor:    { cd: 6.0,  mana: 28, dmg: 150, radius: 90, delayFrames: 48, countBase: 1, levelsPerExtra: 2 }, // dmg x cấp
+        dagger:    { cd: 2.0,  mana: 20, dmg: 30,  dmgGrowth: 0.3, countBase: 3, countPerLevel: 2, speed: 10, life: 100 },
+        lightning: { cd: 3.5,  mana: 30, dmg: 90,  countBase: 2, countPerLevel: 1 },            // dmg x cấp
+        laser:     { cd: 5.5,  mana: 40, dmg: 160, range: 650, halfAngle: 0.38 },               // dmg x cấp
+        nova:      { cd: 5.0,  mana: 35, dmg: 70,  radiusBase: 140, radiusPerLevel: 14, freezeSec: 1.25 }, // dmg x cấp
+        meteor:    { cd: 6.0,  mana: 40, dmg: 150, radius: 90, delayFrames: 48, countBase: 1, levelsPerExtra: 2 }, // dmg x cấp
         shield:    { cd: 12.0, mana: 22, absorbBase: 40, absorbPerLevel: 25, duration: 6 }
     },
 
@@ -49,14 +49,14 @@ const CONFIG = {
         orbit: { dmg: 5, radius: 80, countBase: 2, speed: 0.04 },                 // số lưỡi = countBase + cấp
         aura:  { dmg: 1.2, radiusBase: 85, radiusPerLevel: 12 }                   // sát thương mỗi khung hình
     },
-    freeze: { sec: 1, bossSec: 0.5, immuneSec: 4 },
+    freeze: { sec: 3, bossSec: 1, immuneSec: 4 },
 
     // ----- KỸ NĂNG CYAN (thần thoại) -----
     fusion: {
-        blade:   { cd: 4, dmg: 55, count: 8, speed: 10 },
-        thunder: { cd: 3, dmg: 100, count: 5 },
-        storm:   { active: 6, cd: 7, dmg: 8, radius: 120, count: 8, speed: 0.08 },
-        vamp:    { active: 6, cd: 7, dmg: 1.8, radius: 130, heal: 0.5 }
+        blade:   { cd: 10, dmg: 120, count: 8, speed: 10 },
+        thunder: { cd: 10, dmg: 200, count: 5 },
+        storm:   { active: 6, cd: 14, dmg: 14, radius: 120, count: 8, speed: 0.08 },
+        vamp:    { active: 6, cd: 12, dmg: 4, radius: 130, heal: 0.5 }
     },
 
     // ----- ĐIỂM KỸ NĂNG (chế độ Tháp) -----
@@ -89,7 +89,7 @@ const CONFIG = {
 
     // ----- CHẾ ĐỘ THÁP (100 tầng) -----
     tower: {
-        arenaRadius: 520, squareHalf: 470, maxFloor: 100, introSec: 5, bossEvery: 5,
+        arenaRadius: 520, squareHalf: 470, maxFloor: 100, introSec: 3, bossEvery: 5,
         squareChance: 0.35, squareChanceBoss: 0.5,       // tỉ lệ tầng hình vuông (cố định theo số tầng)
         obstacleFromFloor: 3, obstacleChance: 0.7,       // chướng ngại vật: từ tầng 3, 70% tầng thường (tầng boss luôn có)
         dizzySec: 2, dizzyDmgBonus: 0.5,                 // boss lướt trúng trụ: choáng 2s và chịu thêm 50% sát thương
@@ -127,25 +127,25 @@ const CONFIG = {
 
     // ----- KỸ NĂNG BOSS -----
     bossSkills: {
-        radialCount: 12, radialDmg: 18, radialSpeed: 4.5, radialInterval: 2.8,   // đạn vòng
+        radialCount: 12, radialDmg: 40, radialSpeed: 4.5, radialInterval: 2.8,   // đạn vòng
         chargeInterval: 4.2, chargeSpeed: 8, chargeFrames: 38, windupFrames: 36,    // lướt (windup = thời gian báo trước)
         enrageHpPct: 0.3, enrageSpeedMult: 1.4,
         towerInterval: 4.8, finalInterval: 4.5, finalEnrageInterval: 3.5,          // nhịp tung chiêu riêng (tầng 30 nhanh hơn)
-        summonCount: 4, meteorCount: 5, finalMeteorCount: 7, meteorDmg: 28, meteorRadius: 70, meteorDelay: 52,
-        beamDmg: 35, beamWidth: 36, slamDmg: 30, slamRadius: 175, teleportDmg: 28,
+        summonCount: 4, meteorCount: 5, finalMeteorCount: 7, meteorDmg: 75, meteorRadius: 70, meteorDelay: 52,
+        beamDmg: 60, beamWidth: 36, slamDmg: 50, slamRadius: 175, teleportDmg: 45,
         shieldSec: 4, shieldReduce: 0.7, spiralDmg: 14,
-        fanDmg: 14, crossDmg: 30, poolDmg: 8, sweepDmg: 10, stunSec: 1.0,        // kỹ năng mới
+        fanDmg: 30, crossDmg: 70, poolDmg: 33, sweepDmg: 30, stunSec: 1.0,        // kỹ năng mới
         dmgPerFloor: 0.012,                                                      // sát thương chiêu boss tăng mỗi tầng
         minInterval: 2.0, intervalDropPerFloor: 0.035,
         delayScalePerFloor: 0.004, minDelayScale: 0.55,                          // thời gian báo trước ngắn dần theo tầng
         catchUp: { startDist: 230, range: 380, maxBonus: 1.3 },                  // boss chạy nhanh hơn khi bạn kéo giãn khoảng cách
-        megaDmg: 26, cageDmg: 9, immuneSec: 5,                                  // kỹ năng mới: đại chấn động, lồng laser, miễn debuff
+        megaDmg: 90, cageDmg: 30, immuneSec: 5,                                  // kỹ năng mới: đại chấn động, lồng laser, miễn debuff
         centerSpeedMul: 4.5, centerHold: { megaNova: 130, cageLasers: 230, bulletStorm: 240 }  // boss lao về giữa sàn rồi thi triển                             // nhịp tung chiêu: càng lên cao càng nhanh
     },
 
     // ----- VÀNG & CỬA HÀNG -----
     shop: {
-        prices: { sword: 250, hammer: 300, dual: 350, bow: 250, spear: 300, axe: 320, staff: 350 },
+        prices: { sword: 2500, hammer: 3000, dual: 3500, bow: 2500, spear: 3000, axe: 3200, staff: 3500 },
         hpPotion: { price: 60, heal: 0.6 },   // hồi % máu tối đa
         mpPotion: { price: 60 }
     },
@@ -489,7 +489,7 @@ const player = {
     weapon: 'sword', comboStep: 0, comboTimer: 0, gold: 0, shield: 0, shieldTimer: 0, stunT: 0, stunImmune: 0, swingT: 0,
 
     // Skill Slots
-    activeSlots: ['dagger', null],
+    activeSlots: [null, null],
     activeCdTimers: [0, 0],
 
     // Skill Registry
@@ -955,9 +955,21 @@ function drawWeaponShape(c, id, sc = 1) {
         c.fillStyle = W.color; c.fillRect(30, -11, 4, 22); c.fillRect(42, -11, 4, 22);
         c.strokeStyle = '#334155'; c.lineWidth = 1.2; c.strokeRect(30, -11, 16, 22);
     } else if (id === 'dual') {
-        c.save(); c.rotate(-0.4); c.translate(0, -4); hilt(); blade(30, 3, '#7dd3fc', '#0284c7'); c.restore();
-        c.save(); c.rotate(0.4); c.translate(0, 4); hilt(); blade(30, 3, '#fdba74', '#ea580c'); c.restore();
-    } else if (id === 'bow') {
+    // Cây kiếm bên trái (dưới)
+    c.save();
+    c.translate(-6, 12); // Dịch sang bên trái và xuống dưới tay trái
+        // Xoay hướng ra ngoài một chút
+    hilt(); 
+    blade(28, 3, '#7dd3fc', '#0284c7'); 
+    c.restore();
+
+    // Cây kiếm bên phải (trên)
+    c.save();
+    c.translate(6, -12);  // Dịch sang bên phải và lên trên tay phải        // Xoay hướng ra ngoài một chút
+    hilt(); 
+    blade(28, 3, '#fdba74', '#ea580c'); 
+    c.restore();
+            }  else if (id === 'bow') {
         c.strokeStyle = '#92400e'; c.lineWidth = 3.5; c.beginPath(); c.arc(4, 0, 24, -1.15, 1.15); c.stroke();
         const bx = 4 + 24 * Math.cos(1.15), by = 24 * Math.sin(1.15);
         c.strokeStyle = '#e2e8f0'; c.lineWidth = 1.2; c.beginPath(); c.moveTo(bx, -by); c.lineTo(bx - 6, 0); c.lineTo(bx, by); c.stroke();
