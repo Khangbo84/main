@@ -17,34 +17,45 @@
     {
       "id": "crown",
       "name": "Vương miện",
+      "price": 300,
       "src": "../asset/infinite/crown.svg",
       "offsetX": 0,
-      "offsetY": -20,
+      "offsetY": -19,
       "width": 30,
       "rotate": 0,
-      "rotateWithFacing": false,
       "layer": "front"
     },
     {
       "id": "glasses",
       "name": "Kính đen",
+      "price": 120,
       "src": "../asset/infinite/glasses.svg",
-      "offsetX": 0,
-      "offsetY": -3,
-      "width": 26,
-      "rotate": 0,
-      "rotateWithFacing": false,
+      "offsetX": 7,
+      "offsetY": 0,
+      "width": 24,
+      "rotate": 90,
       "layer": "front"
     },
     {
       "id": "cape",
       "name": "Áo choàng",
+      "price": 200,
       "src": "../asset/infinite/cape.svg",
-      "offsetX": -12,
+      "offsetX": -10,
       "offsetY": 0,
       "width": 34,
       "rotate": 0,
-      "rotateWithFacing": true,
+      "layer": "back"
+    },
+    {
+      "id": "dragon_wings",
+      "name": "Cánh rồng",
+      "price": 800,
+      "src": "../asset/infinite/dragon_wings.svg",
+      "offsetX": -12,
+      "offsetY": 0,
+      "width": 44,
+      "rotate": 0,
       "layer": "back"
     }
   ],
@@ -53,6 +64,7 @@
       "id": "sword_fire",
       "weapon": "sword",
       "name": "Kiếm Lửa",
+      "price": 400,
       "src": "../asset/infinite/sword_fire.svg",
       "length": 66,
       "pivot": 0.1,
@@ -61,9 +73,24 @@
       "rotate": 0
     },
     {
+      "id": "dual_ice_fire",
+      "weapon": "dual",
+      "name": "Song Kiếm Băng Hỏa",
+      "price": 500,
+      "src": "../asset/infinite/dual_ice.svg",
+      "src2": "../asset/infinite/dual_fire.svg",
+      "length": 58,
+      "pivot": 0.1,
+      "spread": 0.42,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotate": 0
+    },
+    {
       "id": "spear_gold",
       "weapon": "spear",
       "name": "Giáo Vàng",
+      "price": 400,
       "src": "../asset/infinite/spear_gold.svg",
       "length": 78,
       "pivot": 0.1,
@@ -75,6 +102,7 @@
       "id": "staff_star",
       "weapon": "staff",
       "name": "Trượng Sao",
+      "price": 400,
       "src": "../asset/infinite/staff_star.svg",
       "length": 60,
       "pivot": 0.1,
@@ -87,4 +115,4 @@
   "enemies": {},
   "bosses": {},
   "background": {}
-}
+    }
