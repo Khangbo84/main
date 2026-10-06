@@ -203,6 +203,7 @@
                     <span id="finalKills" class="text-xl font-extrabold text-emerald-400">0</span>
                 </div>
             </div>
+            <div id="coinReward" class="text-amber-300 text-sm font-bold mb-3"></div>
             <button id="restartBtn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-black text-base tracking-wider uppercase transition shadow-lg shadow-red-600/30 active:scale-95">
                 CHƠI LẠI TỪ ĐẦU
             </button>
@@ -232,13 +233,13 @@
     <div id="skinModal" class="hidden fixed inset-0 flex items-center justify-center bg-slate-950/90 p-3" style="z-index:60">
         <div class="glass-panel rounded-3xl w-full max-w-2xl border-amber-500/40 shadow-2xl flex flex-col" style="max-height: calc(var(--app-h, 100vh) - 16px)">
             <div class="flex items-center justify-between p-3 pb-2">
-                <h3 class="text-base font-black text-amber-400">👕 SKIN</h3>
+                <div class="flex items-center gap-3"><h3 class="text-base font-black text-amber-400">👕 SKIN</h3><span class="text-sm font-black text-yellow-300">🪙 <span id="skinCoins">0</span></span><span id="skinMsg" class="text-[11px] font-bold text-rose-300"></span></div>
                 <button id="skinCloseBtn" class="py-1.5 px-4 rounded-xl bg-amber-500 text-slate-950 font-black text-xs uppercase">Đóng</button>
             </div>
             <div class="flex gap-3 p-3 pt-1 flex-1" style="min-height:0">
                 <div class="flex flex-col items-center gap-1 flex-none">
                     <canvas id="skinPreview" width="130" height="130" class="rounded-2xl bg-slate-900/80 border border-slate-700"></canvas>
-                    <div id="skinPreviewLabel" class="text-[10px] text-gray-400">Xem trước</div>
+                    <div id="skinPreviewLabel" class="text-[10px] text-gray-400">Xem trước</div><div class="text-[9px] text-gray-500">Chạm để dừng/xoay</div>
                 </div>
                 <div class="flex-1 flex flex-col" style="min-width:0; min-height:0">
                     <div id="skinTabs" class="flex gap-1.5 mb-2">
@@ -308,5 +309,5 @@
     <div id="touchZone" class="absolute inset-0 z-10 pointer-events-auto md:hidden"></div>
 
     <script src="../js/infinite_warrior.js"></script>
-    </body>
-    </html>
+</body>
+</html>
