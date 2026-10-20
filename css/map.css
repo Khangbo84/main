@@ -1,3 +1,150 @@
+body {
+  margin: 0;
+  font-family: system-ui;
+  background: #0b1220;
+  color: white;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+@font-face {
+  font-family: 'MinecraftTen';
+  src: url('../MinecraftTen-VGORe.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ===== HEADER ===== */
+.header {
+  text-align: center;
+  padding: 30px 20px 20px;
+  color: white;
+  font-family: "MinecraftTen";
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 1px;
+  font-family: "MinecraftTen";
+}
+
+.header p {
+  margin: 10px 0 0;
+  opacity: 0.8;
+  font-family: "MinecraftTen";
+}
+
+/* ===== CONTROLS ===== */
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.controls input,
+.controls select {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 10px;
+  border-radius: 12px;
+  font-family: "MinecraftTen";
+}
+
+/* ===== CATEGORY ===== */
+.category-filter {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px;
+  flex-wrap: wrap;
+}
+
+.category-filter button {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none;
+  background: #1a2235;
+  color: white;
+  cursor: pointer;
+  font-family: "MinecraftTen";
+}
+
+.category-filter .active {
+  background: #6fbaff;
+  color: black;
+}
+
+/* ===== GRID ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.card {
+  background: #121a2e;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  color: white;
+  font-family: "MinecraftTen";
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-family: "MinecraftTen";
+}
+
+.type {
+  display: inline-block;
+  font-family: system-ui;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-weight: 600;
+  margin-left: 6px;
+  font-size: 12px;
+  opacity: 1;
+  margin-bottom: 8px;
+}
+
+.parkours {
+  background: #abfff2;
+  color: #ffffff;
+}
+
+.adventure {
+  background: #4b8e61;
+  color: #ffffff;
+}
+
+.minigames {
+  background: #dc0000;
+  color: #000000;
+}
+
 /* ===== POPUP ===== */
 .popup.hidden { display: none; }
 
@@ -29,24 +176,18 @@
   position: absolute;
   top: 12px;
   right: 12px;
-
   width: 36px;
   height: 36px;
-
   border-radius: 50%;
   border: none;
-
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(6px);
-
   color: #fff;
   font-size: 18px;
   font-weight: bold;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -87,7 +228,7 @@
   background: #000;
 }
 
-/* ===== GALLERY DỌC ===== */
+/* ===== GALLERY ===== */
 .popup-gallery {
   display: flex;
   flex-direction: column;
@@ -114,6 +255,7 @@
 
 .changelog-header h3 {
   margin: 0;
+  font-family: "MinecraftTen";
 }
 
 .changelog-version {
@@ -198,6 +340,3 @@ body.no-scroll {
 #popup-desc {
   white-space: pre-line;
 }
-
-.type {
-  display: inline-block;
