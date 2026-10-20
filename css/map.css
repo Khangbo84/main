@@ -1,88 +1,3 @@
-body {
-  margin: 0;
-  font-family: system-ui;
-  background: #0b1220;
-  color: white;
-  text-decoration: none; /* Bỏ gạch chân mặc định của thẻ a */
-  color: inherit;        /* Giữ nguyên màu chữ cũ, không bị đổi thành màu xanh link */
-  display: block;        /* Đảm bảo thẻ a co giãn chuẩn như thẻ div cũ */
-}
-
-/* ===== HEADER ===== */
-.header {
-  text-align: center;
-  padding: 30px 20px;
-  color: white;
-  font-family: "MinecraftTen"
-}
-
-/* ===== CONTROLS ===== */
-.controls {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  padding: 10px;
-  flex-wrap: wrap;
-}
-
-.controls input,
-.controls select {
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 10px;
-  border-radius: 12px;
-}
-
-/* ===== CATEGORY ===== */
-.category-filter {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 10px;
-  flex-wrap: wrap;
-}
-
-.category-filter button {
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: none;
-  background: #1a2235;
-  color: white;
-  cursor: pointer;
-}
-
-.category-filter .active {
-  background: #6fbaff;
-  color: black;
-}
-
-/* ===== GRID ===== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
-  gap: 16px;
-  padding: 16px;
-}
-
-.card {
-  background: #121a2e;
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
-  color: white;
-  font-family: "MinecraftTen";
-}
-
-.card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-}
-
-.card-body {
-  padding: 10px;
-}
 /* ===== POPUP ===== */
 .popup.hidden { display: none; }
 
@@ -102,11 +17,11 @@ body {
   position: relative;
   max-width: 800px;
   width: 90%;
-  max-height: 90vh; /* 🔥 GIỚI HẠN */
+  max-height: 90vh;
   margin: 5vh auto;
   background: #111827;
   border-radius: 16px;
-  overflow-y: auto; /* 🔥 SCROLL NỘI BỘ */
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -150,6 +65,26 @@ body {
 .popup-content {
   padding: 16px;
   color: white;
+}
+
+.popup-video-wrapper {
+  margin-bottom: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+}
+
+.popup-video-wrapper.hidden {
+  display: none;
+}
+
+.popup-video-wrapper iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: #000;
 }
 
 /* ===== GALLERY DỌC ===== */
@@ -262,35 +197,7 @@ body.no-scroll {
 
 #popup-desc {
   white-space: pre-line;
-  }
+}
+
 .type {
   display: inline-block;
-  font-family: system-ui;
-  padding: 3px 9px;
-  border-radius: 999px;
-  font-weight: 600;
-  margin-left: 6px;
-  font-size: 12px;
-  opacity: 1.0;
-}
-.parkours {
-  background: #abfff2;
-  color: #ffffff;
-}
-.adventure {
-  background: #4b8e61;
-  color: #ffffff;
-  }
-.minigames {
-  background: #dc0000
-  background: #dc0000;
-  background: #dc0000
-  color: #000000;
-}
-/*===font===*/
-@font-face {
-  font-family: 'MinecraftTen';
-  src: url('../MinecraftTen-VGORe.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}

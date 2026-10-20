@@ -5,6 +5,7 @@
     "category": "map",
     "type": "parkours",
     "image": "parkour_25_levels.jpg",
+    "link-youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
 
     "gallery": [
       "p25l_img1.png",
@@ -16,6 +17,10 @@
     ],
 
     "version": "Minecraft Bedrock 1.21.30",
+    "changelog": {
+      "Minecraft Bedrock 1.21.30": "Init release",
+      "Minecraft Bedrock 1.21.130+": "New update: added Easter eggs, improved performance, fixed several bugs."
+    },
     "download": "parkour-25-levels-2-3.mctemplate"
   },
 
@@ -23,6 +28,8 @@
 //type addon:{ tools, survival, furniture}
 //type pack:{ pvp, changes, vibrant visual}
 //category:{ map, addon, pack}
+//link-youtube: optional YouTube video URL for preview at the top of the popup gallery
+//changelog: can be a string, an object {"version": "text"}, or an array [{"version": "v1", "text": "..."}] 
 
 **Runestones**
 Single item: 
