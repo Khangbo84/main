@@ -16,6 +16,7 @@
     ],
     "changelog":"Init release",
     "version": "Minecraft Bedrock 1.21.30",
+    "link-youtube":"https://youtu.be/9rDlaXXf-i4?si=Q_bkBJ11JR94CyRa",
     "download": "parkour-25-levels-2-3.mctemplate"
   },
   {
@@ -41,8 +42,9 @@
       "ds-v2-8.jpg",
       "ds-v2-9.jpg"
     ],
-    "changelog":"Dimensions Spiral v2.1 update,with new system:Time,Easter egg,Finish,Snake...\nEaster eggs has increased to 10, can you find them?\nRedecorate and change all 3 dimensions.[V2.1 fixed 2 bug,Make the three spirals look more natural.]",
+    "changelog":{"Dimensions Spiral v2.0":"with new system:Time,Easter egg,Finish,Snake...\nEaster eggs has increased to 10, can you find them?\nRedecorate and change all 3 dimensions.","Dimensions Spiral V2.1":"fixed 2 bug,Make the three spirals look more natural."},
     "version": "Minecraft Bedrock 1.21.130+",
+    "link-youtube": "https://youtu.be/Xo0kabJbtwE?si=RiAx_yqS_5BL-_QF",
     "download": "dimensions-spiral-v2-1.mctemplate"
   },
   {
@@ -62,6 +64,7 @@
     ],
     "changelog":"Init release",
     "version": "Minecraft Bedrock 1.21.120+",
+    "link-youtube":"https://youtu.be/pIszXrk39G4?si=D1jDXZkIgkJmtMQZ",
     "download": "1st-anniversary-parkour.mctemplate"
   },
   {
@@ -77,6 +80,7 @@
     ],
     "changelog":"Init release",
     "version": "Minecraft Bedrock 1.21.70+",
+    "link-youtube":"https://youtu.be/IxCtTsOFJ8w?si=KQfLfBNyJESNq-I2",
     "download": "the-summer-island.mctemplate"
   },
   {
@@ -95,6 +99,7 @@
     ],
     "changelog":"Init release",
     "version": "Minecraft Bedrock 1.21.120+",
+    "link-youtube":"https://youtu.be/ZJPljc1DOCs?si=Wd4hb5K6w7sRlHia",
     "download": "the-autumn-island.mctemplate"
   },
   {
@@ -114,6 +119,7 @@
     ],
     "changelog":"Init release",
     "version": "Minecraft Bedrock 1.21.120+",
+    "link-youtube":"https://youtu.be/oe62ZEbf7dA?si=JCOUQhJnlqVbDX5D",
     "download": "parkour-25-levels-2.mctemplate"
   },
   {
@@ -132,6 +138,7 @@
     ],
     "changelog": "Supereasymaps hub 2 (v1.1) update:add 2 parkour(The Parkour,Strange Parkour)\nMap have new features:Shop,Events,Change log and News",
     "version": "Minecraft Bedrock 1.21.70+",
+    "link-youtube":"https://youtu.be/gHFW3h7QFKA?si=GH5bvB8skNVKphLT",
     "download": "supereasymaps-hub-2-v1-1.mctemplate"
   }
 ]
