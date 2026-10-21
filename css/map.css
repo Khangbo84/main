@@ -21,6 +21,19 @@ body {
   padding: 30px 20px 20px;
   color: white;
   font-family: "MinecraftTen";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-banner {
+  display: block;
+  width: min(100%, 980px);
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(30, 70, 95, 0.15);
 }
 
 .header h1 {
@@ -31,7 +44,7 @@ body {
 }
 
 .header p {
-  margin: 10px 0 0;
+  margin: 0;
   opacity: 0.8;
   font-family: "MinecraftTen";
 }
@@ -287,6 +300,11 @@ body {
 }
 
 @media (max-width: 600px) {
+  .header-banner {
+    border-radius: 12px;
+    max-height: 150px;
+  }
+
   .changelog-header {
     align-items: flex-start;
     flex-direction: column;
